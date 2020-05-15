@@ -7,6 +7,6 @@ namespace DevDH.Magic.DAL.EntityFactory
 {
     public interface IEntityContextFactory
     {
-        DbContext CreateDbContext();
+        DbContext GetDbContext();
     }
 }

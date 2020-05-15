@@ -27,7 +27,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             //}
 
             //return dbContext;
-            var myContext = contextFactory.CreateDbContext();
+            var myContext = contextFactory.GetDbContext();
             return myContext;
         }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleApp.Abstractions.DataObjects
 {
-    public interface IBaseObjectSql : DevDH.Magic.Abstractions.DataObjects.IObjectSqlBase
+    public interface IBaseObjectSql : DevDH.Magic.Abstractions.DataObjects.IBaseObjectSql
     {
     }
 }
