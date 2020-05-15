@@ -41,15 +41,15 @@ namespace ConsoleApp.NUnit
             blog3 = var_blog3.Data;
 
 
-            var var_post11 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post11", IdBlog = blog1.Id });
+            var var_post11 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post11", IdBlog = blog1.id });
             SimpleAssert(var_post11.IsValid);
             post11 = var_post11.Data;
 
-            var var_post12 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post12", IdBlog = blog1.Id });
+            var var_post12 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post12", IdBlog = blog1.id });
             SimpleAssert(var_post12.IsValid);
             post12 = var_post12.Data;
 
-            var var_post21 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post21", IdBlog = blog2.Id });
+            var var_post21 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post21", IdBlog = blog2.id });
             SimpleAssert(var_post21.IsValid);
             post21 = var_post21.Data;
         }
@@ -64,22 +64,22 @@ namespace ConsoleApp.NUnit
         [OneTimeTearDown]
         public async Task CleanUp()
         {
-            var var_blog1 = await dalDatabaseSql.Blog.DeleteByIdAsync(blog1.Id);
+            var var_blog1 = await dalDatabaseSql.Blog.DeleteByIdAsync(blog1.id);
             SimpleAssert(var_blog1.IsValid);
 
-            var var_blog2 = await dalDatabaseSql.Blog.DeleteByIdAsync(blog2.Id);
+            var var_blog2 = await dalDatabaseSql.Blog.DeleteByIdAsync(blog2.id);
             SimpleAssert(var_blog2.IsValid);
 
-            var var_blog3 = await dalDatabaseSql.Blog.DeleteByIdAsync(blog3.Id);
+            var var_blog3 = await dalDatabaseSql.Blog.DeleteByIdAsync(blog3.id);
             SimpleAssert(var_blog3.IsValid);
 
-            var var_post11 = await dalDatabaseSql.Post.DeleteByIdAsync(post11.Id);
+            var var_post11 = await dalDatabaseSql.Post.DeleteByIdAsync(post11.id);
             SimpleAssert(var_post11.IsValid);
 
-            var var_post12 = await dalDatabaseSql.Post.DeleteByIdAsync(post12.Id);
+            var var_post12 = await dalDatabaseSql.Post.DeleteByIdAsync(post12.id);
             SimpleAssert(var_post12.IsValid);
 
-            var var_post21 = await dalDatabaseSql.Post.DeleteByIdAsync(post21.Id);
+            var var_post21 = await dalDatabaseSql.Post.DeleteByIdAsync(post21.id);
             SimpleAssert(var_post21.IsValid);
         }
     }

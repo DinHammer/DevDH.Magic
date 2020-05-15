@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DevDH.Magic.Abstractions.DataObjects
@@ -9,6 +10,7 @@ namespace DevDH.Magic.Abstractions.DataObjects
     /// </summary>
     public interface IObjectSqlBase
     {
-        int Id { get; set; }
+        [Key]
+        int id { get; set; }
     }
 }

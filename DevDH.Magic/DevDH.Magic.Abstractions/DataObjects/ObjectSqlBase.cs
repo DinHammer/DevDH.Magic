@@ -9,6 +9,6 @@ namespace DevDH.Magic.Abstractions.DataObjects
     /// </summary>
     public class ObjectSqlBase : IObjectSqlBase
     {
-        public int Id { get; set; }
+        public int id { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConsoleApp.EntityFactory.Migrations
 {
-    public partial class _20200503_init : Migration
+    public partial class _20200515_init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,20 +11,20 @@ namespace ConsoleApp.EntityFactory.Migrations
                 name: "Blogs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                    table.PrimaryKey("PK_Blogs", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "BlogImages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Image = table.Column<byte[]>(nullable: true),
                     Caption = table.Column<string>(nullable: true),
@@ -32,12 +32,12 @@ namespace ConsoleApp.EntityFactory.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogImages", x => x.Id);
+                    table.PrimaryKey("PK_BlogImages", x => x.id);
                     table.ForeignKey(
                         name: "FK_BlogImages_Blogs_IdBlog",
                         column: x => x.IdBlog,
                         principalTable: "Blogs",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -45,7 +45,7 @@ namespace ConsoleApp.EntityFactory.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
@@ -53,12 +53,12 @@ namespace ConsoleApp.EntityFactory.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.PrimaryKey("PK_Posts", x => x.id);
                     table.ForeignKey(
                         name: "FK_Posts_Blogs_IdBlog",
                         column: x => x.IdBlog,
                         principalTable: "Blogs",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

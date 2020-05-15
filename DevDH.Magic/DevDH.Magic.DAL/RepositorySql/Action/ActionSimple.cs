@@ -346,13 +346,13 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         public Task<RequestResult<T>> GetDataByIdAsunc<T>(int id) where T : class, dalDataObjects.IObjectSqlBase
             => Task.Run(() => { return GetDataById<T>(id); });
         public RequestResult<T> GetDataById<T>(int id) where T : class, dalDataObjects.IObjectSqlBase
-            => GetDataFirstByQuery<T>(x => x.Id == id);
+            => GetDataFirstByQuery<T>(x => x.id == id);
 
 
         public Task<RequestResult<Tuple<bool, T>>> GetDataByIdCheckValidAsunc<T>(int id) where T : class, dalDataObjects.IObjectSqlBase
             => Task.Run(() => { return GetDataByIdCheckValid<T>(id); });
         public RequestResult<Tuple<bool, T>> GetDataByIdCheckValid<T>(int id) where T : class, dalDataObjects.IObjectSqlBase
-            => GetDataFirstByQueryCheckValid<T>(x => x.Id == id);
+            => GetDataFirstByQueryCheckValid<T>(x => x.id == id);
 
         #endregion
     }

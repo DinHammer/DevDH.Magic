@@ -6,6 +6,6 @@ namespace ConsoleApp.Abstractions.DataObjects
 {
     public class BaseObjectSql : IBaseObjectSql
     {
-        public int Id { get; set; }
+        public int id { get; set; }
     }
 }
