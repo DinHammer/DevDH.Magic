@@ -8,7 +8,7 @@ namespace DevDH.Magic.Abstractions.DataObjects
     /// <summary>
     /// Обьект от которого должны наследоваться все Sql обьекты в MsSql датабасе
     /// </summary>
-    public interface IBaseObjectSql
+    public interface IBaseObjectId
     {
         [Key]
         int id { get; set; }

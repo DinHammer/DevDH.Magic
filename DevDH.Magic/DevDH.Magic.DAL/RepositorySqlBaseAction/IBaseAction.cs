@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace DevDH.Magic.DAL.RepositorySqlBaseAction
 {
-    public interface IBaseAction<T> where T : class, dalDataObjects.IBaseObjectSql
+    public interface IBaseAction<T> where T : class, dalDataObjects.IBaseObjectId
     {
         Task<RequestResult<T>> AddDataAsync(T data);
         RequestResult<T> AddData(T data);
@@ -41,7 +41,7 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
         Task<RequestResult<List<T>>> GetDataAllAsunc();
         RequestResult<List<T>> GetDataAll();
 
-        Task<RequestResult<Tuple<int>>> GetCountAsunc();
+        Task<RequestResult<Tuple<int>>> GetCountAsync();
         RequestResult<Tuple<int>> GetCount();
 
         Task<RequestResult<List<T>>> GetDataByQueryAsync(Expression<Func<T, bool>> predicate);

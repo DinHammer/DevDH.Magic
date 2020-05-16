@@ -14,7 +14,7 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
     public class BaseAction : ConstantBase
     { }
 
-    public class BaseAction<T> : BaseAction, IBaseAction<T> where T : class, dalDataObjects.IBaseObjectSql
+    public class BaseAction<T> : BaseAction, IBaseAction<T> where T : class, dalDataObjects.IBaseObjectId
     {
         public Task<RequestResult<T>> AddDataAsync(T data) => dalRepositorySql.ActionSimple.AddDataAsync<T>(data);
         public RequestResult<T> AddData(T data) => dalRepositorySql.ActionSimple.AddData<T>(data);
@@ -46,7 +46,7 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
         public Task<RequestResult<List<T>>> GetDataAllAsunc() => dalRepositorySql.ActionSimple.GetDataAllAsunc<T>();
         public RequestResult<List<T>> GetDataAll() => dalRepositorySql.ActionSimple.GetDataAll<T>();
 
-        public Task<RequestResult<Tuple<int>>> GetCountAsunc() => dalRepositorySql.ActionSimple.GetCountAsync<T>();
+        public Task<RequestResult<Tuple<int>>> GetCountAsync() => dalRepositorySql.ActionSimple.GetCountAsync<T>();
         public RequestResult<Tuple<int>> GetCount() => dalRepositorySql.ActionSimple.GetCount<T>();
 
         public Task<RequestResult<List<T>>> GetDataByQueryAsync(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.GetDataByQueryAsync<T>(predicate);
