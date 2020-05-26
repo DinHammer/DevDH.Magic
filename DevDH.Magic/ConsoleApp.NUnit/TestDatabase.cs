@@ -29,28 +29,28 @@ namespace ConsoleApp.NUnit
 
 
             var var_blog1 = await dalDatabaseSql.Blog.AddDataAsync(new dalDataObjects.Blog { Url = "www.ololo.com" });
-            SimpleAssert(var_blog1.IsValid);
+            SimpleAssertRequest(var_blog1);
             blog1 = var_blog1.Data;
 
             var var_blog2 = await dalDatabaseSql.Blog.AddDataAsync(new dalDataObjects.Blog { Url = "www.pishPish.com" });
-            SimpleAssert(var_blog2.IsValid);
+            SimpleAssertRequest(var_blog2);
             blog2 = var_blog2.Data;
 
             var var_blog3 = await dalDatabaseSql.Blog.AddDataAsync(new dalDataObjects.Blog { Url = "www.ololoPishPish.com" });
-            SimpleAssert(var_blog3.IsValid);
+            SimpleAssertRequest(var_blog3);
             blog3 = var_blog3.Data;
 
 
             var var_post11 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post11", IdBlog = blog1.id });
-            SimpleAssert(var_post11.IsValid);
+            SimpleAssertRequest(var_post11);
             post11 = var_post11.Data;
 
             var var_post12 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post12", IdBlog = blog1.id });
-            SimpleAssert(var_post12.IsValid);
+            SimpleAssertRequest(var_post12);
             post12 = var_post12.Data;
 
             var var_post21 = await dalDatabaseSql.Post.AddDataAsync(new dalDataObjects.Post { Content = "post21", IdBlog = blog2.id });
-            SimpleAssert(var_post21.IsValid);
+            SimpleAssertRequest(var_post21);
             post21 = var_post21.Data;
         }
 
@@ -58,7 +58,7 @@ namespace ConsoleApp.NUnit
         public async Task TestGetAllBlog()
         {
             var result = await dalDatabaseSql.Blog.GetDataAllAsunc();
-            SimpleAssert(result.IsValid);
+            SimpleAssertRequest(result);
         }
 
         [OneTimeTearDown]

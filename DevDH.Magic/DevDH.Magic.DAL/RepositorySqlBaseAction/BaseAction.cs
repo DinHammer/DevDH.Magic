@@ -61,7 +61,7 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
         public Task<RequestResult<T>> GetDataByIdAsync(int id) => dalRepositorySql.ActionSimple.GetDataByIdAsunc<T>(id);
         public RequestResult<T> GetDataById(int id) => dalRepositorySql.ActionSimple.GetDataById<T>(id);
 
-        public Task<RequestResult<Tuple<bool, T>>> GetDataByIdCheckValidAsunc(int id) => dalRepositorySql.ActionSimple.GetDataByIdCheckValidAsunc<T>(id);
-        public RequestResult<Tuple<bool, T>> GetDataByIdCheckValid(int id) => dalRepositorySql.ActionSimple.GetDataByIdCheckValid<T>(id);        
+        public Task<RequestResult<Tuple<bool, T>>> GetDataByIdCheckValidAsunc(int id) => dalRepositorySql.ActionSimple.GetDataByIdAndCheckValidAsunc<T>(id);
+        public RequestResult<Tuple<bool, T>> GetDataByIdCheckValid(int id) => dalRepositorySql.ActionSimple.GetDataByIdAndCheckValid<T>(id);        
     }
 }

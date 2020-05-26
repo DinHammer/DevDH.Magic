@@ -36,7 +36,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(data, statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult<T>(data, statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -57,7 +57,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
         #endregion
@@ -79,7 +79,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -100,7 +100,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
         #endregion
@@ -121,7 +121,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -141,7 +141,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -155,14 +155,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                 var resultTmp = GetDataById<T>(id);
                 if (!resultTmp.IsValid)
                 {
-                    return new RequestResult(resultTmp.Status, resultTmp.ExceptionList);
+                    return new RequestResult(resultTmp.Status, resultTmp.Message);
                 }
 
                 return Delete<T>(resultTmp.Data);
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -177,14 +177,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                 var resultTmp = GetDataByQuery<T>(predicate);
                 if (!resultTmp.IsValid)
                 {
-                    return new RequestResult(resultTmp.Status, resultTmp.ExceptionList);
+                    return new RequestResult(resultTmp.Status, resultTmp.Message);
                 }
 
                 return DeleteRange<T>(resultTmp.Data);
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -198,14 +198,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                 var tmpAll = GetDataAll<T>();
                 if (!tmpAll.IsValid)
                 {
-                    return new RequestResult(tmpAll.Status, tmpAll.ExceptionList);
+                    return new RequestResult(tmpAll.Status, tmpAll.Message);
                 }
 
                 return DeleteRange<T>(tmpAll.Data);
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -227,7 +227,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<List<T>>(null, statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult<List<T>>(null, statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -247,7 +247,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<Tuple<int>>(null, statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult<Tuple<int>>(null, statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -269,7 +269,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<List<T>>(result, statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult<List<T>>(result, statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -287,7 +287,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                     var resultTmp = GetDataByQuery<T>(predicate);
                     if (!resultTmp.IsValid)
                     {
-                        return new RequestResult<T>(result, resultTmp.Status, resultTmp.ExceptionList);
+                        return new RequestResult<T>(result, resultTmp.Status, resultTmp.Message, resultTmp.ExceptionList);
                     }
 
                     int count = resultTmp.Data.Count;
@@ -310,7 +310,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(result, statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult<T>(result, statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -327,18 +327,18 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
                     switch (resultTmp.Status)
                     {
-                        case Abstractions.Constants.ConstantEnum.RequestStatus.Ok:
+                        case RequestStatus.Ok:
                             return new RequestResult<Tuple<bool, T>>(Tuple.Create(true, resultTmp.Data), statusOk);
-                        case Abstractions.Constants.ConstantEnum.RequestStatus.NoContent:
+                        case RequestStatus.NoContent:
                             return new RequestResult<Tuple<bool, T>>(Tuple.Create(false, resultTmp.Data), statusOk);
                         default:
-                            return new RequestResult<Tuple<bool, T>>(null, resultTmp.Status, resultTmp.ExceptionList);
+                            return new RequestResult<Tuple<bool, T>>(null, resultTmp.Status, resultTmp.Message);
                     }
                 }
             }
             catch (Exception ex)
             {
-                return new RequestResult<Tuple<bool, T>>(Tuple.Create(false, default(T)), statusDatabaseError, new List<Exception> { ex });
+                return new RequestResult<Tuple<bool, T>>(Tuple.Create(false, default(T)), statusDatabaseError, ex.Message, new List<Exception> { ex });
             }
         }
 
@@ -349,9 +349,9 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             => GetDataFirstByQuery<T>(x => x.id == id);
 
 
-        public Task<RequestResult<Tuple<bool, T>>> GetDataByIdCheckValidAsunc<T>(int id) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return GetDataByIdCheckValid<T>(id); });
-        public RequestResult<Tuple<bool, T>> GetDataByIdCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<Tuple<bool, T>>> GetDataByIdAndCheckValidAsunc<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return GetDataByIdAndCheckValid<T>(id); });
+        public RequestResult<Tuple<bool, T>> GetDataByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId
             => GetDataFirstByQueryCheckValid<T>(x => x.id == id);
 
         #endregion

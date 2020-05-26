@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -62,7 +63,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<string>(string.Empty, statusSerializationError, new List<Exception> { ex });
+                return new RequestResult<string>(string.Empty, statusSerializationError, ex.Message);
             }
         }
 
@@ -75,9 +76,9 @@ namespace DevDH.Magic.Abstractions.Staff
                 var data = JsonConvert.DeserializeObject<T>(jsonString);
                 return new RequestResult<T>(data, statusOk);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return new RequestResult<T>(default(T), statusSerializationError, new List<Exception> { e });
+                return new RequestResult<T>(default(T), statusSerializationError, ex.Message);
             }
         }
 

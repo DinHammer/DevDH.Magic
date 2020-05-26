@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using constantEnum = DevDH.Magic.Abstractions.Constants.ConstantEnum;
+//using constantEnum = DevDH.Magic.Abstractions.Constants.ConstantEnum;
 using SimpleTools = DevDH.Magic.Abstractions.Staff.SimpleTools;
 
 namespace DevDH.Magic.Abstractions
@@ -11,11 +11,11 @@ namespace DevDH.Magic.Abstractions
         public readonly List<Exception> ExceptionList;
         public string Message;
         public string MessageException => SimpleTools.Instance.ConvertExceptionList2String(ExceptionList);
-        public readonly constantEnum.RequestStatus Status;
+        public readonly RequestStatus Status;
         public readonly T Data;
-        public bool IsValid => Status == constantEnum.RequestStatus.Ok && Data != null && ExceptionList.Count == 0;
+        public bool IsValid => Status == RequestStatus.Ok && Data != null && ExceptionList.Count == 0;
 
-        public RequestResult(T data, constantEnum.RequestStatus status, List<Exception> exceptionList = null, string message = null)
+        public RequestResult(T data, RequestStatus status, string message = null, List<Exception> exceptionList = null )
         {
             Data = data;
             Status = status;
@@ -31,7 +31,7 @@ namespace DevDH.Magic.Abstractions
             Message = message;
         }
 
-        public override string ToString() { return $@"Result: {Status}, Data: {Data}, Message: {MessageException}, ExceptionCount: {ExceptionList?.Count}"; }
+        public override string ToString() { return $@"Result: {Status}, Data: {Data}, Message: {MessageException}, ExceptionCount: {ExceptionList.Count}"; }
     }
 
 
@@ -41,10 +41,10 @@ namespace DevDH.Magic.Abstractions
         public readonly List<Exception> ExceptionList;
         public string Message;
         public string MessageException => SimpleTools.Instance.ConvertExceptionList2String(ExceptionList);
-        public readonly constantEnum.RequestStatus Status;
-        public bool IsValid => Status == constantEnum.RequestStatus.Ok;
+        public readonly RequestStatus Status;
+        public bool IsValid => Status == RequestStatus.Ok;
 
-        public RequestResult(constantEnum.RequestStatus status, List<Exception> exceptionList = null, string message = null)
+        public RequestResult(RequestStatus status, string message = null, List<Exception> exceptionList = null )
         {
             Status = status;
 
@@ -60,6 +60,33 @@ namespace DevDH.Magic.Abstractions
             Message = message;
         }
 
-        public override string ToString() { return $@"Result: {Status},  Message: {MessageException}, ExceptionCount: {ExceptionList?.Count}"; }
+        public override string ToString() { return $@"Result: {Status},  Message: {MessageException}, ExceptionCount: {ExceptionList.Count}"; }
+    }
+
+    public enum RequestStatus
+    {
+        Unknown = 0,
+        Ok = 200,
+        NotModified = 304,
+        BadRequest = 400,
+        Unauthorized = 401,
+        Forbidden = 403,
+        NotFound = 404,
+        InternalServerError = 500,
+        ServiceUnavailable = 503,
+        Canceled = 1001,
+        InvalidRequest = 1002,
+        SerializationError = 1003,
+        DatabaseError = 1100,
+        FileAccessError = 2001,
+        NoContent,
+        NotOneValue,
+        NotUnique,
+        SomethingWrong,
+        AlreadyExist,
+        BlobErrorCreateContainer,
+        BlobUploadError,
+        BlobGetAllItemError,
+        InputParamsNotValid
     }
 }

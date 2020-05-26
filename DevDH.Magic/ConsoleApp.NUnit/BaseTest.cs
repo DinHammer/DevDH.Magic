@@ -8,19 +8,19 @@ namespace ConsoleApp.NUnit
 {
     public class BaseTest
     {
-        protected void SimpleAssert(bool is_valid)
+        protected void SimpleAssert(bool is_valid, string message = null)
         {
-            Assert.True(is_valid);
+            Assert.True(is_valid, message);
         }
 
-        protected void SimpleRequestAssert(RequestResult requestResult)
+        protected void SimpleAssertRequest(RequestResult requestResult)
         {
-            SimpleAssert(requestResult.IsValid);
+            SimpleAssert(requestResult.IsValid, requestResult.Message);
         }
 
-        protected void SimpleRequestAssert<T>(RequestResult<T> requestResult) where T : class
+        protected void SimpleAssertRequest<T>(RequestResult<T> requestResult) where T : class
         {
-            SimpleAssert(requestResult.IsValid);
+            SimpleAssert(requestResult.IsValid, requestResult.Message);
         }
     }
 }
