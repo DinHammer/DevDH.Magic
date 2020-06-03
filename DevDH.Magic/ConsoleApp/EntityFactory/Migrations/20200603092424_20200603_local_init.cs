@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConsoleApp.EntityFactory.Migrations
 {
-    public partial class _20200503_init : Migration
+    public partial class _20200603_local_init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

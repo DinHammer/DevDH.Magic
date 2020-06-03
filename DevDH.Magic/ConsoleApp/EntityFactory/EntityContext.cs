@@ -1,7 +1,7 @@
 ﻿/*
  * dir .\ConsoleApp
- * Add-Migration 20200503_init -OutputDir ./EntityFactory/Migrations
- * Update-Database
+ * dotnet ef migrations add 20200603_local_init --project ConsoleApp --context EntityContext  --output-dir ./EntityFactory/Migrations
+ * dotnet ef database update
  */
 using System;
 using System.Collections.Generic;
@@ -18,11 +18,14 @@ namespace ConsoleApp.EntityFactory
         public DbSet<dalDataObjects.BlogImage> BlogImages { get; set; }
         public DbSet<dalDataObjects.Post> Posts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string string_connection = @"Data Source=(localdb)\MSSQLLocalDB;Database=DevDhMagicDB;Trusted_Connection=True;";
-            optionsBuilder.UseSqlServer(string_connection);
-        }
+        public EntityContext(DbContextOptions<EntityContext> options) : base(options)
+        { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string string_connection = @"Data Source=(localdb)\MSSQLLocalDB;Database=DevDhMagicDB;Trusted_Connection=True;";
+        //    optionsBuilder.UseSqlServer(string_connection);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
