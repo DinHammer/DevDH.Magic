@@ -27,7 +27,8 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             try
             {
                 using (var context = GetMyContext())
-                {
+                {                    
+
                     context.Set<T>().Add(data);
                     context.SaveChanges();
 

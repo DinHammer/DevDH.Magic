@@ -7,12 +7,20 @@ using dalDatabaseSql = ConsoleApp.DAL.DatabaseSQL.DatabaseSQL;
 using dalRepositorySql = DevDH.Magic.DAL.RepositorySql.RepositorySql;
 using entityFactory = ConsoleApp.EntityFactory;
 using dalDataObjects = ConsoleApp.Abstractions.DataObjects;
+using constEnums = ConsoleApp.Abstractions.Constants.ConstantEnums;
 
 namespace ConsoleApp.NUnit
 {
     [TestFixture]
+    [TestFixtureSource(typeof(InitTestDatabase), nameof(InitTestDatabase.FixtureParams))]
     public class TestDatabase : BaseTest
     {
+        constEnums.TypeDbContext typeDbContext;
+        public TestDatabase(constEnums.TypeDbContext typeDbContext)
+        {
+            this.typeDbContext = typeDbContext;
+        }
+
         dalDataObjects.Blog blog1;
         dalDataObjects.Blog blog2;
         dalDataObjects.Blog blog3;
@@ -24,7 +32,7 @@ namespace ConsoleApp.NUnit
         [OneTimeSetUp]
         public async Task Init()
         {
-            dalRepositorySql.Init(new entityFactory.EntityFactory());
+            dalRepositorySql.Init(new entityFactory.EntityFactory(typeDbContext));
             dalDatabaseSql.Init();
 
 
