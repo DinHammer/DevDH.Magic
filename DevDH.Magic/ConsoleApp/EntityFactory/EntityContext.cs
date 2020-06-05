@@ -1,7 +1,12 @@
 ﻿/*
  * dir .\ConsoleApp
- * dotnet ef migrations add 20200604_sqlite_init --project ConsoleApp --context EntityContextSqlite  --output-dir ./EntityFactory/Migrations/Sqlite
- * dotnet ef migrations add 20200604_sql_init --project ConsoleApp --context EntityContextSql  --output-dir ./EntityFactory/Migrations/Sql 
+ * Создать миграцию для SqLite в свою папку
+ * dotnet ef migrations add mgr_init_sqlite --project ConsoleApp --context EntityContextSqlite  --output-dir ./EntityFactory/Migrations/Sqlite
+ * 
+ * Создать миграцию для контекста SQL в свою папку
+ * dotnet ef migrations add mgr_init_sql --project ConsoleApp --context EntityContextSql  --output-dir ./EntityFactory/Migrations/Sql 
+ * Применить миграцию для SQL из папки
+ * dotnet ef database update --project ConsoleApp --context EntityContextSql
  * 
  * dotnet ef migrations add 20200604_sqlite_init --project ConsoleApp --context EntityContextSql  --output-dir ./EntityFactory/Migrations/ 
  * 
@@ -13,6 +18,7 @@ using System.IO;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using dalDataObjects = ConsoleApp.Abstractions.DataObjects;
+using constString = ConsoleApp.Abstractions.Constants.ConstantStrings;
 
 namespace ConsoleApp.EntityFactory
 {
@@ -20,9 +26,10 @@ namespace ConsoleApp.EntityFactory
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string string_connection = @"Data Source=(localdb)\MSSQLLocalDB;Database=DevDhMagicDB;Trusted_Connection=True;";
-            optionsBuilder.UseSqlServer(string_connection);
-            //optionsBuilder.UseSqlServer(string_connection,x=>x.MigrationsAssembly("ConsoleApp.EntityFactory.Migrations.Sql"));
+            string name_database = constString.name_database;
+            string string_connection = $@"Data Source=(localdb)\MSSQLLocalDB;Database={name_database};Trusted_Connection=True;";
+            //optionsBuilder.UseSqlServer(string_connection);
+            optionsBuilder.UseSqlServer(string_connection,x=>x.MigrationsAssembly("ConsoleApp.EntityFactory.Migrations.Sql"));
         }
     }
 
@@ -30,15 +37,16 @@ namespace ConsoleApp.EntityFactory
     {
         public EntityContextSqlite()
         {
-            Database.Migrate();
-            //Database.EnsureCreated();
+            Database.Migrate();            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DevDhMagicDB.db");
+            string name_database = constString.name_database;
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), $"{name_database}.db");
             //optionsBuilder.UseSqlite($"Data Source = DevDhMagicDB.db", x => x.MigrationsAssembly("ConsoleApp.EntityFactory.Migrations.Sqlite"));
             optionsBuilder.UseSqlite($"Data Source = {dbPath}");
+            //optionsBuilder.UseSqlite($"Data Source = {dbPath}", x => x.MigrationsAssembly("ConsoleApp.EntityFactory.Migrations.Sqlite"));
         }        
     }
 
@@ -48,9 +56,7 @@ namespace ConsoleApp.EntityFactory
         public DbSet<dalDataObjects.Blog> Blogs { get; set; }
         public DbSet<dalDataObjects.BlogImage> BlogImages { get; set; }
         public DbSet<dalDataObjects.Post> Posts { get; set; }
-
-        //public EntityContextBase(DbContextOptions<EntityContextBase> options) : base(options)
-        //{ }
+        
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

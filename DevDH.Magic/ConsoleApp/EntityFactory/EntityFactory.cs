@@ -7,52 +7,26 @@ using constEnums = ConsoleApp.Abstractions.Constants.ConstantEnums;
 
 namespace ConsoleApp.EntityFactory
 {
-    public class EntityFactory : DevDH.Magic.DAL.EntityFactory.IEntityContextFactory//, IDesignTimeDbContextFactory<EntityContextBase>
+    public class EntityFactory : DevDH.Magic.DAL.EntityFactory.IEntityContextFactory
     {
         constEnums.TypeDbContext typeDbContext;
-        string str_db_name;
+        
         public EntityFactory(constEnums.TypeDbContext typeDbContext)
         {
-            this.typeDbContext = typeDbContext;
-            str_db_name = "DevDhMagicDB";
-        }
-
-        //public EntityContextBase CreateDbContext(string[] args)
-        //{
-        //    DbContextOptionsBuilder<EntityContextBase> optionsBuilder = new DbContextOptionsBuilder<EntityContextBase>();
-
-        //    switch (typeDbContext)
-        //    {
-        //        case constEnums.TypeDbContext.typeSql:
-        //            string string_connection = @$"Data Source=(localdb)\MSSQLLocalDB;Database={str_db_name};Trusted_Connection=True;";
-        //            optionsBuilder.UseSqlServer(string_connection);
-        //            break;
-        //        case constEnums.TypeDbContext.typeSqlite:
-        //            optionsBuilder.UseSqlite($"Data Source = {str_db_name}.db");
-        //            break;
-        //    }
-
-
-        //    return new EntityContextBase(optionsBuilder.Options);
-        //}
+            this.typeDbContext = typeDbContext;            
+        }        
 
         public DbContext GetDbContext()
-        {
-            //DbContext dbContext = null;
+        {            
             switch (typeDbContext)
             {
                 case constEnums.TypeDbContext.typeSql:
-                    return new EntityContextSql();                    
-                    
+                    return new EntityContextSql();                                        
                 case constEnums.TypeDbContext.typeSqlite:
-                    return new EntityContextSqlite();
-                //dbContext.Database.Migrate();
-                //break;
+                    return new EntityContextSqlite();                
                 default:
                     throw new ArgumentNullException();
-            }
-                        
-            //return dbContext;
+            }                                    
         }
     }
 }

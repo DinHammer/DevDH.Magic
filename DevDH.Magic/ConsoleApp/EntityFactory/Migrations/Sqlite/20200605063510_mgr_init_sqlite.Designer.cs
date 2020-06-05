@@ -3,14 +3,16 @@ using System;
 using ConsoleApp.EntityFactory;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ConsoleApp.EntityFactory.Migrations
+namespace ConsoleApp.EntityFactory.Migrations.Sqlite
 {
     [DbContext(typeof(EntityContextSqlite))]
-    partial class EntityContextSqliteModelSnapshot : ModelSnapshot
+    [Migration("20200605063510_mgr_init_sqlite")]
+    partial class mgr_init_sqlite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
