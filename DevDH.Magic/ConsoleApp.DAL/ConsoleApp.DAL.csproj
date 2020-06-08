@@ -9,8 +9,4 @@
     <ProjectReference Include="..\DevDH.Magic.DAL\DevDH.Magic.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntityFactory\" />
-  </ItemGroup>
-
 </Project>

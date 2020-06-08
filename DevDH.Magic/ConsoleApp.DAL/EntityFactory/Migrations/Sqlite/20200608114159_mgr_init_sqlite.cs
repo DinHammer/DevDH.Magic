@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ConsoleApp.EntityFactory.Migrations.Sql
+namespace ConsoleApp.DAL.EntityFactory.Migrations.Sqlite
 {
-    public partial class mgr_init_sql : Migration
+    public partial class mgr_init_sqlite : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace ConsoleApp.EntityFactory.Migrations.Sql
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -25,7 +25,7 @@ namespace ConsoleApp.EntityFactory.Migrations.Sql
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Image = table.Column<byte[]>(nullable: true),
                     Caption = table.Column<string>(nullable: true),
                     IdBlog = table.Column<int>(nullable: false)
@@ -46,7 +46,7 @@ namespace ConsoleApp.EntityFactory.Migrations.Sql
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     IdBlog = table.Column<int>(nullable: false)

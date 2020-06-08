@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using dalDatabaseSql = ConsoleApp.DAL.DatabaseSQL.DatabaseSQL;
 using dalRepositorySql = DevDH.Magic.DAL.RepositorySql.RepositorySql;
-using entityFactory = ConsoleApp.EntityFactory;
+using entityFactory = ConsoleApp.DAL.EntityFactory;
 using dalDataObjects = ConsoleApp.Abstractions.DataObjects;
 using constEnums = ConsoleApp.Abstractions.Constants.ConstantEnums;
 
