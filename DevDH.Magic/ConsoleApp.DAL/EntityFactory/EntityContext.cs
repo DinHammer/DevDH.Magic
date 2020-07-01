@@ -1,7 +1,7 @@
 ﻿/*
  * dir .\ConsoleApp
  * Создать миграцию для SqLite в свою папку(в PackageManagerConsole в качестые Default Project выбрать: ConsoleApp.Dal(но это не точно))
- * Add-Migration mgr_init_sql  -Context EntityContextSql  -OutputDir ./EntityFactory/Migrations/Sql
+ * Add-Migration mgr_init_sqlite  -Context EntityContextSqlite  -OutputDir ./EntityFactory/Migrations/Sqlite
  * 
  * Создать миграцию для контекста SQL в свою папку
  * dotnet ef migrations add mgr_init_sql --project ConsoleApp --context EntityContextSql  --output-dir ./EntityFactory/Migrations/Sql 

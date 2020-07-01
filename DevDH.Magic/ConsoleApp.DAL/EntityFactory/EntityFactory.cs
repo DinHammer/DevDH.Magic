@@ -7,6 +7,14 @@ using constEnums = ConsoleApp.Abstractions.Constants.ConstantEnums;
 
 namespace ConsoleApp.DAL.EntityFactory
 {
+    public class EntityFactorySql : IDesignTimeDbContextFactory<EntityContextSql>
+    {
+        public EntityContextSql CreateDbContext(string[] args)
+        {
+            return new EntityContextSql();
+        }
+    }
+
     public class EntityFactory : DevDH.Magic.DAL.EntityFactory.IEntityContextFactory
     {
         constEnums.TypeDbContext typeDbContext;
