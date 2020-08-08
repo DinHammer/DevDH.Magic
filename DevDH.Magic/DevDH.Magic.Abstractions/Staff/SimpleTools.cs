@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using constantBase = DevDH.Magic.Abstractions.Constants.ConstantBase;
@@ -52,9 +53,58 @@ namespace DevDH.Magic.Abstractions.Staff
         }
 
         #region Json
-        public Task<RequestResult<string>> JsonGetStringByDataAsync(object item)
-            => Task.Run(() => { return JsonGetStringByData(item); });
-        public RequestResult<string> JsonGetStringByData(object item)
+        RequestResult<string> GetStringContentFromResource(Assembly assembly, string str_resource_name)
+        {
+            try
+            {
+                using (Stream stream = assembly.GetManifestResourceStream(str_resource_name))
+                {
+                    using (StreamReader streamReader = new StreamReader(stream))
+                    {
+                        string content = streamReader.ReadToEnd();
+                        return new RequestResult<string>(content, statusOk);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
+            }
+        }
+
+        public Task<RequestResult> JsnAsnSerialize2File(
+            object item,
+            string str_path,
+            NullValueHandling nullValueHandling = NullValueHandling.Ignore)
+            => Task.Run(() => { return JsnSerialize2File(item, str_path, nullValueHandling); });
+        public RequestResult JsnSerialize2File(
+            object item, 
+            string str_path, 
+            NullValueHandling nullValueHandling = NullValueHandling.Ignore)
+        {
+            try
+            {
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                jsonSerializer.NullValueHandling = nullValueHandling;
+
+                using (StreamWriter streamWriter = new StreamWriter(str_path))
+                {
+                    using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
+                    {
+                        jsonSerializer.Serialize(jsonWriter, item);
+                    }
+                }
+                return new RequestResult(statusOk);
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult(statusSerializationError, message: ex.Message, exceptionList: new List<Exception> { ex });
+            }
+        }
+
+        public Task<RequestResult<string>> JsnAsnGetStringByData(object item)
+            => Task.Run(() => { return JsnGetStringByData(item); });
+        public RequestResult<string> JsnGetStringByData(object item)
         {
             try
             {
@@ -67,9 +117,9 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public Task<RequestResult<T>> JsonGetDataByStringAsync<T>(string jsonString) where T : class
-            => Task.Run(() => { return JsonGetDataByString<T>(jsonString); });
-        public RequestResult<T> JsonGetDataByString<T>(string jsonString) where T : class
+        public Task<RequestResult<T>> JsnAsnGetDataByString<T>(string jsonString) where T : class
+            => Task.Run(() => { return JsnGetDataByString<T>(jsonString); });
+        public RequestResult<T> JsnGetDataByString<T>(string jsonString) where T : class
         {
             try
             {
@@ -173,7 +223,15 @@ namespace DevDH.Magic.Abstractions.Staff
         }
         #endregion
 
-        #region
+        #region SpecialFolder
+        public string SpcFldGetPath(Environment.SpecialFolder specialFolder = Environment.SpecialFolder.LocalApplicationData)
+            => Environment.GetFolderPath(specialFolder);
+
+        public string SpcFldGetPathByName(string file_name, Environment.SpecialFolder specialFolder = Environment.SpecialFolder.LocalApplicationData)
+            => System.IO.Path.Combine(SpcFldGetPath(specialFolder), file_name);
+        #endregion
+
+        #region FileAction
 
         public bool FileIsExist(string path)
         => File.Exists(path);
