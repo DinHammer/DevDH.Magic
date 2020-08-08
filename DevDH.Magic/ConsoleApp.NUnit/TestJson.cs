@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using models = ConsoleApp.NUnit.Staff.Models;
@@ -39,6 +40,30 @@ namespace ConsoleApp.NUnit
             SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");
 
             simpleTools.Instance.FileDeleteIfExist(str_file_path);
+        }
+
+        [Test]
+        public async Task TestDeserializeFromResources()
+        {
+            System.Reflection.Assembly assembly = ConsoleApp.Program.GetAssembly();
+
+            string str_name = $"{nameof(mdlJson)}.json";
+            //string str_name = $"{nameof(mdlJson)}";
+
+
+
+
+            var var_name = simpleTools.Instance.RsrGetFullName(assembly, str_name);
+            SimpleAssert(var_name.IsValid, var_name.Message);
+
+            var var_stream = simpleTools.Instance.RsrGetStreamByName(assembly, str_name);
+            SimpleAssert(var_stream.IsValid, var_stream.Message);
+
+
+            var var_deserialize = await simpleTools.Instance.JsnAsnDeserializeFromResource<models.MdlJsonTest>(assembly, str_name);
+            SimpleAssert(var_deserialize.IsValid, var_deserialize.Message);
+
+            SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");            
         }
     }
 }

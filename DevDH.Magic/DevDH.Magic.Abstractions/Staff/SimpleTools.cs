@@ -52,7 +52,88 @@ namespace DevDH.Magic.Abstractions.Staff
             return result;
         }
 
+        #region ResourceAction
+
+        public RequestResult<System.IO.Stream> RsrGetStreamByName(Assembly assembly, string name)
+        {
+            var var_name = RsrGetFullName(assembly, name);
+            if (!var_name.IsValid)
+            {
+                return new RequestResult<Stream>(null, var_name.Status, var_name.Message);
+            }
+
+            try
+            {
+                System.IO.Stream stream = assembly.GetManifestResourceStream(var_name.Data);
+                return new RequestResult<Stream>(stream, statusOk);
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult<Stream>(null, statusSomethingWrong, message: ex.Message);
+            }
+        }
+
+        public RequestResult<string> RsrGetFullName(Assembly assembly, string name)
+        {
+            try
+            {
+                List<string> resources = assembly.GetManifestResourceNames().Where(x => x.EndsWith(name)).ToList();
+                if (resources.Count == 1)
+                {
+                    return new RequestResult<string>(resources.First(), statusOk);
+                }
+                else if (resources.Count > 1)
+                {
+                    return new RequestResult<string>(string.Empty, statusNotOneValue, message: $"name: {name}, has: {resources.Count} items");
+                }
+                else
+                {
+                    return new RequestResult<string>(string.Empty, statusNotFound);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
+            }
+
+        }
+
+        #endregion
+
         #region Json
+
+        public Task<RequestResult<T>> JsnAsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
+            => Task.Run(() => { return JsnDeserializeFromResource<T>(assembly, str_name); });
+        public RequestResult<T> JsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
+        {
+            var var_stream = RsrGetStreamByName(assembly, str_name);
+            if (!var_stream.IsValid)
+            {
+                return new RequestResult<T>(null, var_stream.Status, var_stream.Message);
+            }
+
+            try
+            {
+                using (Stream stream = var_stream.Data)
+                {
+                    using (StreamReader streamReader = new StreamReader(stream))
+                    {
+                        string content = streamReader.ReadToEnd();
+                        T item = JsonConvert.DeserializeObject<T>(content);
+
+                        return new RequestResult<T>(item, statusOk);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult<T>(null, statusSomethingWrong, message: ex.Message);
+            }
+            finally
+            {
+                var_stream.Data?.Dispose();
+            }
+        }
 
         public Task<RequestResult<T>> JsnAsnDeserializeFromFile<T>(string str_path) where T : class
             => Task.Run(() => { return JsnDeserializeFromFile<T>(str_path); });
@@ -76,24 +157,24 @@ namespace DevDH.Magic.Abstractions.Staff
 
         }
 
-        RequestResult<string> GetStringContentFromResource(Assembly assembly, string str_resource_name)
-        {
-            try
-            {
-                using (Stream stream = assembly.GetManifestResourceStream(str_resource_name))
-                {
-                    using (StreamReader streamReader = new StreamReader(stream))
-                    {
-                        string content = streamReader.ReadToEnd();
-                        return new RequestResult<string>(content, statusOk);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
-            }
-        }
+        //RequestResult<string> GetStringContentFromResource(Assembly assembly, string str_resource_name)
+        //{
+        //    try
+        //    {
+        //        using (Stream stream = assembly.GetManifestResourceStream(str_resource_name))
+        //        {
+        //            using (StreamReader streamReader = new StreamReader(stream))
+        //            {
+        //                string content = streamReader.ReadToEnd();
+        //                return new RequestResult<string>(content, statusOk);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
+        //    }
+        //}
 
         public Task<RequestResult> JsnAsnSerialize2File(
             object item,
