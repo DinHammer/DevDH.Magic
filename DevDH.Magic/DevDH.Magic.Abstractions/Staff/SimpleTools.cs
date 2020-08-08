@@ -53,6 +53,29 @@ namespace DevDH.Magic.Abstractions.Staff
         }
 
         #region Json
+
+        public Task<RequestResult<T>> JsnAsnDeserializeFromFile<T>(string str_path) where T : class
+            => Task.Run(() => { return JsnDeserializeFromFile<T>(str_path); });
+        public RequestResult<T> JsnDeserializeFromFile<T>(string str_path) where T: class
+        {
+            var var_string = FileReadAllText(str_path);
+            if (!var_string.IsValid)
+            {
+                return new RequestResult<T>(null, var_string.Status, var_string.Message);
+            }
+
+            try
+            {
+                T result = JsonConvert.DeserializeObject<T>(var_string.Data);
+                return new RequestResult<T>(result, statusOk);
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult<T>(null, statusSerializationError, message: ex.Message);
+            }
+
+        }
+
         RequestResult<string> GetStringContentFromResource(Assembly assembly, string str_resource_name)
         {
             try
@@ -232,6 +255,19 @@ namespace DevDH.Magic.Abstractions.Staff
         #endregion
 
         #region FileAction
+
+        public RequestResult<string> FileReadAllText(string str_path)
+        {
+            try
+            {
+                string result = File.ReadAllText(str_path);
+                return new RequestResult<string>(result, statusOk);
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
+            }
+        }
 
         public bool FileIsExist(string path)
         => File.Exists(path);

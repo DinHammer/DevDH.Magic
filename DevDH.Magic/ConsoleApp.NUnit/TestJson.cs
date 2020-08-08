@@ -26,7 +26,6 @@ namespace ConsoleApp.NUnit
         public async Task TestSerialize2File()
         {
             string str_file_name = $"{nameof(mdlJson)}.json";
-
             string str_file_path = simpleTools.Instance.SpcFldGetPathByName(str_file_name);
 
             simpleTools.Instance.FileDeleteIfExist(str_file_path);
@@ -34,7 +33,12 @@ namespace ConsoleApp.NUnit
             var var_serialize = await simpleTools.Instance.JsnAsnSerialize2File(mdlJson, str_file_path);
             SimpleAssert(var_serialize.IsValid, var_serialize.Message);
 
-            //simpleTools.Instance.jsna
+            var var_deserialize = await simpleTools.Instance.JsnAsnDeserializeFromFile<models.MdlJsonTest>(str_file_path);
+            SimpleAssert(var_deserialize.IsValid, var_deserialize.Message);
+
+            SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");
+
+            simpleTools.Instance.FileDeleteIfExist(str_file_path);
         }
     }
 }
