@@ -47,7 +47,7 @@ namespace DevDH.Magic.Abstractions.Staff
             => Task.Run(() => { return JsnDeserializeFromFile<T>(str_path); });
         public RequestResult<T> JsnDeserializeFromFile<T>(string str_path) where T : class
         {
-            var var_string = FileReadAllText(str_path);
+            var var_string = mgcFileReadAllText(str_path);
             if (!var_string.IsValid)
             {
                 return new RequestResult<T>(null, var_string.Status, var_string.Message);

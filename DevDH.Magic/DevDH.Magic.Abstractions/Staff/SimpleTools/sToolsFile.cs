@@ -6,7 +6,7 @@ namespace DevDH.Magic.Abstractions.Staff
 {
     public partial class SimpleTools
     {
-        public RequestResult<string> FileReadAllText(string str_path)
+        public RequestResult<string> mgcFileReadAllText(string str_path)
         {
             try
             {
@@ -19,12 +19,12 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public bool FileIsExist(string path)
+        public bool mgcFileIsExist(string path)
         => System.IO.File.Exists(path);
 
-        public void FileDeleteIfExist(string path)
+        public void mgcFileDeleteIfExist(string path)
         {
-            if (FileIsExist(path))
+            if (mgcFileIsExist(path))
             {
                 System.IO.File.Delete(path);
             }

@@ -7,13 +7,13 @@ namespace DevDH.Magic.Abstractions.Staff
 {
     public partial class SimpleTools
     {
-        public bool IsList(object obj)
+        public bool mgcIsList(object obj)
         {
             bool result = obj is IList && obj.GetType().IsGenericType && obj.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
             return result;
         }
 
-        public bool IsClass(object obj)
+        public bool mgcIsClass(object obj)
         {
             Type myType = obj.GetType();
             bool result = myType.IsClass;

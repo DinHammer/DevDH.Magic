@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using dalDataObjects = DevDH.Magic.Abstractions.DataObjects;
 
 namespace DevDH.Magic.Abstractions.Staff
 {
@@ -35,16 +36,16 @@ namespace DevDH.Magic.Abstractions.Staff
             return result;
         }
 
-        public RequestResult<Tuple<int>> ConsvertString2Int(string str, int my_default_int = default_int)
+        public RequestResult<dalDataObjects.MgcInt> ConsvertString2Int(string str, int my_default_int = default_int)
         {
             int result = my_default_int;
             if (Int32.TryParse(str, out result))
             {
-                return new RequestResult<Tuple<int>>(Tuple.Create(result), statusOk);
+                return new RequestResult<dalDataObjects.MgcInt>(new dalDataObjects.MgcInt(result), statusOk);
             }
             else
             {
-                return new RequestResult<Tuple<int>>(null, statusSomethingWrong);
+                return new RequestResult<dalDataObjects.MgcInt>(null, statusSomethingWrong, message: $"Can not convert string {str} to int");
             }
         }
 
