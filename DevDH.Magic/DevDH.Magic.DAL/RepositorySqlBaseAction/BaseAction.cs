@@ -17,51 +17,51 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
     public class BaseAction<T> : BaseAction, IBaseAction<T> where T : class, dalDataObjects.IBaseObjectId
     {
         public Task<RequestResult<T>> mgcAsncAdd(T data) => dalRepositorySql.ActionSimple.mgcAsncAdd<T>(data);
-        public RequestResult<T> mgcAdd(T data) => dalRepositorySql.ActionSimple.mgcAdd<T>(data);
+        public RequestResult<T> mgcSncAdd(T data) => dalRepositorySql.ActionSimple.mgcSncAdd<T>(data);
 
         public Task<RequestResult> mgcAsncAddRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncAddRange<T>(data);
-        public RequestResult mgcAddRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAddRange<T>(data);
+        public RequestResult mgcSncAddRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncAddRange<T>(data);
 
         public Task<RequestResult> mgcAsncUpdate(T data) => dalRepositorySql.ActionSimple.mgcAsncUpdate<T>(data);
-        public RequestResult mgcUpdate(T data) => dalRepositorySql.ActionSimple.mgcUpdate<T>(data);
+        public RequestResult mgcSncUpdate(T data) => dalRepositorySql.ActionSimple.mgcSncUpdate<T>(data);
 
         public Task<RequestResult> mgcAsncUpdateRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncUpdateRange<T>(data);
-        public RequestResult mgcUpdateRange(List<T> data) => dalRepositorySql.ActionSimple.mgcUpdateRange<T>(data);
+        public RequestResult mgcSncUpdateRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncUpdateRange<T>(data);
 
         public Task<RequestResult> mgcAsncDelete(T data) => dalRepositorySql.ActionSimple.mgcAsncDelete<T>(data);
-        public RequestResult mgcDelete(T data) => dalRepositorySql.ActionSimple.mgcDelete<T>(data);
+        public RequestResult mgcSncDelete(T data) => dalRepositorySql.ActionSimple.mgcSncDelete<T>(data);
 
         public Task<RequestResult> mgcAsncDeleteRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncDeleteRange<T>(data);
-        public RequestResult mgcDeleteRange(List<T> data) => dalRepositorySql.ActionSimple.mgcDeleteRange<T>(data);
+        public RequestResult mgcSncDeleteRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncDeleteRange<T>(data);
 
         public Task<RequestResult> mgcAsncDeleteById(int id) => dalRepositorySql.ActionSimple.mgcAsncDeleteById<T>(id);
-        public RequestResult mgcDeleteById(int id) => dalRepositorySql.ActionSimple.mgcDeleteById<T>(id);
+        public RequestResult mgcSncDeleteById(int id) => dalRepositorySql.ActionSimple.mgcSncDeleteById<T>(id);
 
         public Task<RequestResult> mgcAsncDeleteByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncDeleteByQuery<T>(predicate);
-        public RequestResult mgcDeleteByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcDeleteByQuery<T>(predicate);
+        public RequestResult mgcSncDeleteByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncDeleteByQuery<T>(predicate);
 
         public Task<RequestResult> mgcAsncDeleteAll() => dalRepositorySql.ActionSimple.mgcAsncDeleteAll<T>();
-        public RequestResult mgcDeleteAll() => dalRepositorySql.ActionSimple.mgcDeleteAll<T>();
+        public RequestResult mgcSncDeleteAll() => dalRepositorySql.ActionSimple.mgcSncDeleteAll<T>();
 
         public Task<RequestResult<List<T>>> mgcAsncGetAll() => dalRepositorySql.ActionSimple.mgcAsncGetAll<T>();
-        public RequestResult<List<T>> mgcGetAll() => dalRepositorySql.ActionSimple.mgcGetAll<T>();
+        public RequestResult<List<T>> mgcSncGetAll() => dalRepositorySql.ActionSimple.mgcSncGetAll<T>();
 
         public Task<RequestResult<Tuple<int>>> mgcAsncGetCount() => dalRepositorySql.ActionSimple.mgcAsncGetCount<T>();
-        public RequestResult<Tuple<int>> mgcGetCount() => dalRepositorySql.ActionSimple.mgcGetCount<T>();
+        public RequestResult<Tuple<int>> mgcSncGetCount() => dalRepositorySql.ActionSimple.mgcSncGetCount<T>();
 
         public Task<RequestResult<List<T>>> mgcAsncGetByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncGetByQuery<T>(predicate);
-        public RequestResult<List<T>> mgcGetByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcGetByQuery<T>(predicate);
+        public RequestResult<List<T>> mgcSncGetByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncGetByQuery<T>(predicate);
 
         public Task<RequestResult<T>> mgcAsncGetFirstByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncGetFirstByQuery<T>(predicate);
-        public RequestResult<T> mgcGetFirstByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcGetFirstByQuery<T>(predicate);
+        public RequestResult<T> mgcSncGetFirstByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncGetFirstByQuery<T>(predicate);
 
         public Task<RequestResult<Tuple<bool, T>>> mgcAsncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncGetFirstByQueryCheckValid<T>(predicate);
-        public RequestResult<Tuple<bool, T>> mgcGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcGetDataFirstByQueryCheckValid<T>(predicate);
+        public RequestResult<Tuple<bool, T>> mgcSncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncGetFirstByQueryCheckValid<T>(predicate);
 
         public Task<RequestResult<T>> mgcAsncGetByIdAsync(int id) => dalRepositorySql.ActionSimple.mgcAsncGetById<T>(id);
-        public RequestResult<T> mgcGetById(int id) => dalRepositorySql.ActionSimple.mgcGetById<T>(id);
+        public RequestResult<T> mgcSncGetById(int id) => dalRepositorySql.ActionSimple.mgcSncGetById<T>(id);
 
         public Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdCheckValid(int id) => dalRepositorySql.ActionSimple.mgcAsncGetByIdAndCheckValid<T>(id);
-        public RequestResult<Tuple<bool, T>> mgcGetByIdCheckValid(int id) => dalRepositorySql.ActionSimple.mgcGetByIdAndCheckValid<T>(id);        
+        public RequestResult<Tuple<bool, T>> mgcSncGetByIdCheckValid(int id) => dalRepositorySql.ActionSimple.mgcGetByIdAndCheckValid<T>(id);        
     }
 }

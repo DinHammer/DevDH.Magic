@@ -21,7 +21,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="data"></param>
         /// <returns></returns>
         Task<RequestResult<T>> mgcAsncAdd<T>(T data) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<T> mgcAdd<T>(T data) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<T> mgcSncAdd<T>(T data) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Добавить набор данных в таблицу
@@ -30,7 +30,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="data"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncAddRange<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcAddRange<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncAddRange<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Обновить одно данное в таблице
@@ -39,7 +39,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="data"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncUpdate<T>(T data) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcUpdate<T>(T data) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncUpdate<T>(T data) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Обновить набор данных в таблице
@@ -48,7 +48,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="items"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncUpdateRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcUpdateRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncUpdateRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
 
 
 
@@ -59,7 +59,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="item"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncDelete<T>(T item) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcDelete<T>(T item) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncDelete<T>(T item) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// УДалить набор данных из таблицы
@@ -68,7 +68,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="items"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncDeleteRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcDeleteRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncDeleteRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Удалить данное по Id
@@ -77,7 +77,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="id"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncDeleteById<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcDeleteById<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncDeleteById<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// УДалить данные по условию
@@ -86,7 +86,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<RequestResult> mgcAsncDeleteByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcDeleteByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncDeleteByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Удалить всё нахрен)
@@ -94,7 +94,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         Task<RequestResult> mgcAsncDeleteAll<T>() where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcDeleteAll<T>() where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcSncDeleteAll<T>() where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить все данные
@@ -102,7 +102,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         Task<RequestResult<List<T>>> mgcAsncGetAll<T>() where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<List<T>> mgcGetAll<T>() where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<List<T>> mgcSncGetAll<T>() where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить колличество данных в таблице
@@ -110,7 +110,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         Task<RequestResult<Tuple<int>>> mgcAsncGetCount<T>() where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<Tuple<int>> mgcGetCount<T>() where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<Tuple<int>> mgcSncGetCount<T>() where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить набор данных удоавлетворяющих запросу
@@ -119,7 +119,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<RequestResult<List<T>>> mgcAsncGetByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<List<T>> mgcGetByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<List<T>> mgcSncGetByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить первое данное удобвлетворящее значению
@@ -128,7 +128,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<RequestResult<T>> mgcAsncGetFirstByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<T> mgcGetFirstByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<T> mgcSncGetFirstByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить одно данное удовлетворяющее запросу и проверить что оно существует
@@ -137,7 +137,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<RequestResult<Tuple<bool, T>>> mgcAsncGetFirstByQueryCheckValid<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<Tuple<bool, T>> mgcGetDataFirstByQueryCheckValid<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<Tuple<bool, T>> mgcSncGetFirstByQueryCheckValid<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить данное по id
@@ -146,7 +146,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="id"></param>
         /// <returns></returns>
         Task<RequestResult<T>> mgcAsncGetById<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<T> mgcGetById<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<T> mgcSncGetById<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Получить данное по id и проверить что оно существует

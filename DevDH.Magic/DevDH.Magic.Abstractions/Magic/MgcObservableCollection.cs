@@ -90,7 +90,9 @@ namespace DevDH.Magic.Abstractions.Magic
 				}
 
 				if (raiseEvents)
+				{
 					RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
+				}
 
 				return;
 			}
