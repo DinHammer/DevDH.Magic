@@ -10,11 +10,11 @@ namespace DevDH.Magic.Abstractions.Staff
 {
     public partial class SimpleTools
     {
-        public Task<RequestResult<T>> JsnAsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
-            => Task.Run(() => { return JsnDeserializeFromResource<T>(assembly, str_name); });
-        public RequestResult<T> JsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
+        public Task<RequestResult<T>> mgcJsncAsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
+            => Task.Run(() => { return mgcJsnSncDeserializeFromResource<T>(assembly, str_name); });
+        public RequestResult<T> mgcJsnSncDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
         {
-            var var_stream = RsrGetStreamByName(assembly, str_name);
+            var var_stream = mgcRsrGetStreamByName(assembly, str_name);
             if (!var_stream.IsValid)
             {
                 return new RequestResult<T>(null, var_stream.Status, var_stream.Message);
@@ -35,7 +35,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(null, statusSomethingWrong, message: ex.Message);
+                return new RequestResult<T>(null, statusSomethingWrong, message: $"can not deserialize json resouce: {str_name} with error: {ex.Message}");
             }
             finally
             {
@@ -43,9 +43,9 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public Task<RequestResult<T>> JsnAsnDeserializeFromFile<T>(string str_path) where T : class
-            => Task.Run(() => { return JsnDeserializeFromFile<T>(str_path); });
-        public RequestResult<T> JsnDeserializeFromFile<T>(string str_path) where T : class
+        public Task<RequestResult<T>> mgcJsnAsncDeserializeFromFile<T>(string str_path) where T : class
+            => Task.Run(() => { return mgcJsnSncDeserializeFromFile<T>(str_path); });
+        public RequestResult<T> mgcJsnSncDeserializeFromFile<T>(string str_path) where T : class
         {
             var var_string = mgcFileReadAllText(str_path);
             if (!var_string.IsValid)
@@ -60,7 +60,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(null, statusSerializationError, message: ex.Message);
+                return new RequestResult<T>(null, statusSerializationError, message: $"can not deserialize json from file: {str_path} with error: {ex.Message}");
             }
 
         }
@@ -84,12 +84,12 @@ namespace DevDH.Magic.Abstractions.Staff
         //    }
         //}
 
-        public Task<RequestResult> JsnAsnSerialize2File(
+        public Task<RequestResult> mgcJsnAsncSerialize2File(
             object item,
             string str_path,
             NullValueHandling nullValueHandling = NullValueHandling.Ignore)
-            => Task.Run(() => { return JsnSerialize2File(item, str_path, nullValueHandling); });
-        public RequestResult JsnSerialize2File(
+            => Task.Run(() => { return mgcJsnSncSerialize2File(item, str_path, nullValueHandling); });
+        public RequestResult mgcJsnSncSerialize2File(
             object item,
             string str_path,
             NullValueHandling nullValueHandling = NullValueHandling.Ignore)
@@ -110,13 +110,13 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusSerializationError, message: ex.Message, exceptionList: new List<Exception> { ex });
+                return new RequestResult(statusSerializationError, message: $"can not serialize json to file: {str_path} with error: {ex.Message}" , exceptionList: new List<Exception> { ex });
             }
         }
 
-        public Task<RequestResult<string>> JsnAsnGetStringByData(object item)
-            => Task.Run(() => { return JsnGetStringByData(item); });
-        public RequestResult<string> JsnGetStringByData(object item)
+        public Task<RequestResult<string>> mgcJsnAsncGetStringByData(object item)
+            => Task.Run(() => { return mgcJsnSncGetStringByData(item); });
+        public RequestResult<string> mgcJsnSncGetStringByData(object item)
         {
             try
             {
@@ -125,13 +125,13 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<string>(string.Empty, statusSerializationError, ex.Message);
+                return new RequestResult<string>(string.Empty, statusSerializationError, message: $"can not serialize object to json with error: {ex.Message}" );
             }
         }
 
-        public Task<RequestResult<T>> JsnAsnGetDataByString<T>(string jsonString) where T : class
-            => Task.Run(() => { return JsnGetDataByString<T>(jsonString); });
-        public RequestResult<T> JsnGetDataByString<T>(string jsonString) where T : class
+        public Task<RequestResult<T>> mgcJsnAsncGetDataByString<T>(string jsonString) where T : class
+            => Task.Run(() => { return mgcJsnSncGetDataByString<T>(jsonString); });
+        public RequestResult<T> mgcJsnSncGetDataByString<T>(string jsonString) where T : class
         {
             try
             {
@@ -140,7 +140,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(default(T), statusSerializationError, ex.Message);
+                return new RequestResult<T>(default(T), statusSerializationError, message:$"can not deserialize string to object with error: {ex.Message}" );
             }
         }
     }

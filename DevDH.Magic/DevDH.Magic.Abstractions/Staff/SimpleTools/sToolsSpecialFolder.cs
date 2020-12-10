@@ -6,10 +6,10 @@ namespace DevDH.Magic.Abstractions.Staff
 {
     public partial class SimpleTools
     {
-        public string SpcFldGetPath(Environment.SpecialFolder specialFolder = Environment.SpecialFolder.LocalApplicationData)
+        public string mgcSpcFldGetPath(Environment.SpecialFolder specialFolder = Environment.SpecialFolder.LocalApplicationData)
             => Environment.GetFolderPath(specialFolder);
 
-        public string SpcFldGetPathByName(string file_name, Environment.SpecialFolder specialFolder = Environment.SpecialFolder.LocalApplicationData)
-            => System.IO.Path.Combine(SpcFldGetPath(specialFolder), file_name);
+        public string mgcSpcFldGetPathByName(string file_name, Environment.SpecialFolder specialFolder = Environment.SpecialFolder.LocalApplicationData)
+            => System.IO.Path.Combine(mgcSpcFldGetPath(specialFolder), file_name);
     }
 }

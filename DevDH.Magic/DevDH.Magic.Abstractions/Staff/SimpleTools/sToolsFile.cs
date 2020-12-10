@@ -15,7 +15,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
+                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: $"can not read all txt in file: {str_path} with error {ex.Message}", exceptionList: new List<Exception> { ex} );
             }
         }
 

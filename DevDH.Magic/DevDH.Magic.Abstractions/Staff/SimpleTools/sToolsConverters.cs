@@ -9,34 +9,29 @@ namespace DevDH.Magic.Abstractions.Staff
     public partial class SimpleTools
     {
 
-        public string ConvertExceptionList2String(List<Exception> exceptions)
+        public string mgcConvertExceptionList2String(List<Exception> exceptions)
         {
             string result = string.Empty;
 
-            try
+            if (exceptions == null)
             {
-                if (exceptions == null)
-                {
-                    return result;
-                }
-
-                if (exceptions?.Count == 0)
-                {
-                    return result;
-                }
-
-                foreach (Exception exception in exceptions)
-                {
-                    result = result + "\n" + exception.Message;
-                }
+                return result;
             }
-            catch
-            { }
+
+            if (exceptions?.Count == 0)
+            {
+                return result;
+            }
+
+            foreach (Exception exception in exceptions)
+            {
+                result = result + "\n" + exception.Message;
+            }
 
             return result;
         }
 
-        public RequestResult<dalDataObjects.MgcInt> ConsvertString2Int(string str, int my_default_int = default_int)
+        public RequestResult<dalDataObjects.MgcInt> mgcConsvertString2Int(string str, int my_default_int = default_int)
         {
             int result = my_default_int;
             if (Int32.TryParse(str, out result))
@@ -49,45 +44,45 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public RequestResult<Tuple<bool>> ConverStringIntToBool(string str)
+        public RequestResult<dalDataObjects.MgcBool> ConverStringIntToBool(string str)
         {
             if (str.Equals("1"))
             {
-                return new RequestResult<Tuple<bool>>(Tuple.Create(true), statusOk);
+                return new RequestResult<dalDataObjects.MgcBool>(new dalDataObjects.MgcBool(true), statusOk);
             }
             else
             {
-                return new RequestResult<Tuple<bool>>(Tuple.Create(false), statusOk);
+                return new RequestResult<dalDataObjects.MgcBool>(new dalDataObjects.MgcBool(), statusOk);
             }
         }
 
-        public RequestResult<Tuple<bool>> ConverStringToBool(string str)
+        public RequestResult<dalDataObjects.MgcBool> mgcConverStringToBool(string str)
         {
             if (Boolean.Parse(str))
             {
-                return new RequestResult<Tuple<bool>>(Tuple.Create(true), statusOk);
+                return new RequestResult<dalDataObjects.MgcBool>(new dalDataObjects.MgcBool(true), statusOk);
             }
             else
             {
-                return new RequestResult<Tuple<bool>>(null, statusSomethingWrong);
+                return new RequestResult<dalDataObjects.MgcBool>(null, statusSomethingWrong, message:$"can not convert string: {str} to Bool");
             }
         }
 
-        public RequestResult<Tuple<DateTimeOffset>> ConvertString2DateTimeOffset(string str)
+        public RequestResult<dalDataObjects.MgcDateTimeOffset> mgcConvertString2DateTimeOffset(string str)
         {
             DateTimeOffset result;
             try
             {
                 result = Convert.ToDateTime(str);
-                return new RequestResult<Tuple<DateTimeOffset>>(Tuple.Create(result), statusOk);
+                return new RequestResult<dalDataObjects.MgcDateTimeOffset>(new dalDataObjects.MgcDateTimeOffset(result), statusOk);
             }
             catch
             {
-                return new RequestResult<Tuple<DateTimeOffset>>(null, statusSomethingWrong);
+                return new RequestResult<dalDataObjects.MgcDateTimeOffset>(null, statusSomethingWrong, message: $"can not convert string: {str} to DateTimeOffset");
             }
         }
 
-        public bool ConvertListBool2Bool(List<bool> list)
+        public bool mgcConvertListBool2Bool(List<bool> list)
             => list.All(x => x == true);
     }
 }

@@ -27,14 +27,14 @@ namespace ConsoleApp.NUnit
         public async Task TestSerialize2File()
         {
             string str_file_name = $"{nameof(mdlJson)}.json";
-            string str_file_path = simpleTools.Instance.SpcFldGetPathByName(str_file_name);
+            string str_file_path = simpleTools.Instance.mgcSpcFldGetPathByName(str_file_name);
 
             simpleTools.Instance.mgcFileDeleteIfExist(str_file_path);
 
-            var var_serialize = await simpleTools.Instance.JsnAsnSerialize2File(mdlJson, str_file_path);
+            var var_serialize = await simpleTools.Instance.mgcJsnAsncSerialize2File(mdlJson, str_file_path);
             SimpleAssert(var_serialize.IsValid, var_serialize.Message);
 
-            var var_deserialize = await simpleTools.Instance.JsnAsnDeserializeFromFile<models.MdlJsonTest>(str_file_path);
+            var var_deserialize = await simpleTools.Instance.mgcJsnAsncDeserializeFromFile<models.MdlJsonTest>(str_file_path);
             SimpleAssert(var_deserialize.IsValid, var_deserialize.Message);
 
             SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");
@@ -53,14 +53,14 @@ namespace ConsoleApp.NUnit
 
 
 
-            var var_name = simpleTools.Instance.RsrGetFullName(assembly, str_name);
+            var var_name = simpleTools.Instance.mgcRsrGetFullName(assembly, str_name);
             SimpleAssert(var_name.IsValid, var_name.Message);
 
-            var var_stream = simpleTools.Instance.RsrGetStreamByName(assembly, str_name);
+            var var_stream = simpleTools.Instance.mgcRsrGetStreamByName(assembly, str_name);
             SimpleAssert(var_stream.IsValid, var_stream.Message);
 
 
-            var var_deserialize = await simpleTools.Instance.JsnAsnDeserializeFromResource<models.MdlJsonTest>(assembly, str_name);
+            var var_deserialize = await simpleTools.Instance.mgcJsncAsnDeserializeFromResource<models.MdlJsonTest>(assembly, str_name);
             SimpleAssert(var_deserialize.IsValid, var_deserialize.Message);
 
             SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");            

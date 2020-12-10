@@ -10,7 +10,7 @@ namespace DevDH.Magic.Abstractions
     {
         public readonly List<Exception> ExceptionList;
         public string Message;
-        public string MessageException => SimpleTools.Instance.ConvertExceptionList2String(ExceptionList);
+        public string MessageException => SimpleTools.Instance.mgcConvertExceptionList2String(ExceptionList);
         public readonly RequestStatus Status;
         public readonly T Data;
         public bool IsValid => Status == RequestStatus.Ok && Data != null && ExceptionList.Count == 0;
@@ -40,7 +40,7 @@ namespace DevDH.Magic.Abstractions
     {
         public readonly List<Exception> ExceptionList;
         public string Message;
-        public string MessageException => SimpleTools.Instance.ConvertExceptionList2String(ExceptionList);
+        public string MessageException => SimpleTools.Instance.mgcConvertExceptionList2String(ExceptionList);
         public readonly RequestStatus Status;
         public bool IsValid => Status == RequestStatus.Ok;
 

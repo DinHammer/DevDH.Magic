@@ -18,28 +18,16 @@ namespace DevDH.Magic.Abstractions.Staff
     public partial class SimpleTools : constantBase
     {
         static readonly Lazy<SimpleTools> LazyInstance = new Lazy<SimpleTools>(() => new SimpleTools(), true);
-        public static SimpleTools Instance => LazyInstance.Value;        
-        
-        
+        public static SimpleTools Instance => LazyInstance.Value;
 
-        public string GuidGetString()
-        {
-            string result = new Guid().ToString();
-            return result;
-        }
-        
+
+
+        public string mgcGuidGetString()
+            => new Guid().ToString();
+
 
         public bool CheckStringSimple(string text)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-            {
-                return false;
-            }
-            else
-            {                
-                return true;
-            }
-        }
+            => !string.IsNullOrWhiteSpace(text);        
                 
     }
 }

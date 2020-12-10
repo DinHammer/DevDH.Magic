@@ -9,9 +9,9 @@ namespace DevDH.Magic.Abstractions.Staff
 {
     public partial class SimpleTools
     {
-        public RequestResult<System.IO.Stream> RsrGetStreamByName(Assembly assembly, string name)
+        public RequestResult<System.IO.Stream> mgcRsrGetStreamByName(Assembly assembly, string name)
         {
-            var var_name = RsrGetFullName(assembly, name);
+            var var_name = mgcRsrGetFullName(assembly, name);
             if (!var_name.IsValid)
             {
                 return new RequestResult<Stream>(null, var_name.Status, var_name.Message);
@@ -28,7 +28,13 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public RequestResult<string> RsrGetFullName(Assembly assembly, string name)
+        /// <summary>
+        /// Получение полного пути до ресурса в выбранном Assembly
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public RequestResult<string> mgcRsrGetFullName(Assembly assembly, string name)
         {
             try
             {
@@ -43,12 +49,12 @@ namespace DevDH.Magic.Abstractions.Staff
                 }
                 else
                 {
-                    return new RequestResult<string>(string.Empty, statusNotFound);
+                    return new RequestResult<string>(string.Empty, statusNotFound, message: $"can not find resource: {name}");
                 }
             }
             catch (Exception ex)
             {
-                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: ex.Message);
+                return new RequestResult<string>(string.Empty, statusSomethingWrong, message: $"can not get resource with error: { ex.Message}");
             }
 
         }

@@ -27,4 +27,24 @@ namespace DevDH.Magic.Abstractions.DataObjects
         }
         public bool bool_value { get; set; }
     }
+
+    public class MgcDateTimeOffset
+    {
+        public MgcDateTimeOffset() { }
+        public MgcDateTimeOffset(DateTimeOffset dateTime_value)
+        {
+            this.dateTime_value = dateTime_value;
+        }
+        public DateTimeOffset dateTime_value { get; set; }
+    }
+
+    public class MgcDateTime
+    {
+        public MgcDateTime() { }
+        public MgcDateTime(DateTime dateTime_value)
+        {
+            this.dateTime_value = dateTime_value;
+        }
+        public DateTime dateTime_value { get; set; }
+    }
 }
