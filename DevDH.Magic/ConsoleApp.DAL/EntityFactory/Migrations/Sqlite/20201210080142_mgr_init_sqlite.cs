@@ -11,9 +11,9 @@ namespace ConsoleApp.DAL.EntityFactory.Migrations.Sqlite
                 name: "Blogs",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(nullable: true)
+                    Url = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,11 +24,11 @@ namespace ConsoleApp.DAL.EntityFactory.Migrations.Sqlite
                 name: "BlogImages",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Image = table.Column<byte[]>(nullable: true),
-                    Caption = table.Column<string>(nullable: true),
-                    IdBlog = table.Column<int>(nullable: false)
+                    Image = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    Caption = table.Column<string>(type: "TEXT", nullable: true),
+                    IdBlog = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,11 +45,11 @@ namespace ConsoleApp.DAL.EntityFactory.Migrations.Sqlite
                 name: "Posts",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    IdBlog = table.Column<int>(nullable: false)
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    Content = table.Column<string>(type: "TEXT", nullable: true),
+                    IdBlog = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
