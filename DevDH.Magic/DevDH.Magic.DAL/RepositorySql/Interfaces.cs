@@ -1,4 +1,5 @@
 ﻿using DevDH.Magic.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,9 +9,7 @@ using dalDataObjects = DevDH.Magic.Abstractions.DataObjects;
 
 namespace DevDH.Magic.DAL.RepositorySql
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    #region IActionSimple
     /// <see cref="DevDH.Magic.DAL.RepositorySql.Action.ActionSimple">
     public interface IActionSimple
     {
@@ -157,4 +156,14 @@ namespace DevDH.Magic.DAL.RepositorySql
         Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
         RequestResult<Tuple<bool, T>> mgcGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
     }
+    #endregion
+
+    #region IActionSql
+    public interface IActionSql
+    {
+
+        Task<RequestResult<DbContext>> GetDbContextAsync();
+        RequestResult<DbContext> GetDbContext();        
+    }
+    #endregion
 }

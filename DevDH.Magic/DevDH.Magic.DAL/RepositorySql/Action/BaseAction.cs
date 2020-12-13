@@ -1,19 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
-//using System.Data.SqlClient;
 using System.Text;
 using ConstantBase = DevDH.Magic.DAL.Staff.ConstantBase;
 using entityFactory = DevDH.Magic.DAL.EntityFactory;
 
 namespace DevDH.Magic.DAL.RepositorySql.Action
 {
-    public class ActionBase : ConstantBase
+    public class BaseAction : ConstantBase
     {
         readonly entityFactory.IEntityContextFactory contextFactory;
 
-        public ActionBase(entityFactory.IEntityContextFactory contextFactory)
+        public BaseAction(entityFactory.IEntityContextFactory contextFactory)
         {
             this.contextFactory = contextFactory;
         }
@@ -27,10 +25,8 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             //}
 
             //return dbContext;
-            var myContext = contextFactory.GetDbContext();            
+            var myContext = contextFactory.GetDbContext();
             return myContext;
         }
-
-
     }
 }
