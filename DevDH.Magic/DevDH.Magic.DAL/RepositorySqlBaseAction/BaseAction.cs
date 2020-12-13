@@ -58,10 +58,10 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
         public Task<RequestResult<Tuple<bool, T>>> mgcAsncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncGetFirstByQueryCheckValid<T>(predicate);
         public RequestResult<Tuple<bool, T>> mgcSncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncGetFirstByQueryCheckValid<T>(predicate);
 
-        public Task<RequestResult<T>> mgcAsncGetByIdAsync(int id) => dalRepositorySql.ActionSimple.mgcAsncGetById<T>(id);
+        public Task<RequestResult<T>> mgcAsncGetById(int id) => dalRepositorySql.ActionSimple.mgcAsncGetById<T>(id);
         public RequestResult<T> mgcSncGetById(int id) => dalRepositorySql.ActionSimple.mgcSncGetById<T>(id);
 
         public Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdCheckValid(int id) => dalRepositorySql.ActionSimple.mgcAsncGetByIdAndCheckValid<T>(id);
-        public RequestResult<Tuple<bool, T>> mgcSncGetByIdCheckValid(int id) => dalRepositorySql.ActionSimple.mgcGetByIdAndCheckValid<T>(id);        
+        public RequestResult<Tuple<bool, T>> mgcSncGetByIdCheckValid(int id) => dalRepositorySql.ActionSimple.mgcSncGetByIdAndCheckValid<T>(id);        
     }
 }

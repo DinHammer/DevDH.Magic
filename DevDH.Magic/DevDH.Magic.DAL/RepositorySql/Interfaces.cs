@@ -154,7 +154,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="id"></param>
         /// <returns></returns>
         Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult<Tuple<bool, T>> mgcGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult<Tuple<bool, T>> mgcSncGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId;
     }
     #endregion
 

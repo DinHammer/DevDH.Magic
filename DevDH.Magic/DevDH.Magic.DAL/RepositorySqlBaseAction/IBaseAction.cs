@@ -53,7 +53,7 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
         Task<RequestResult<Tuple<bool, T>>> mgcAsncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate);
         RequestResult<Tuple<bool, T>> mgcSncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate);
 
-        Task<RequestResult<T>> mgcAsncGetByIdAsync(int id);
+        Task<RequestResult<T>> mgcAsncGetById(int id);
         RequestResult<T> mgcSncGetById(int id);
 
         Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdCheckValid(int id);
