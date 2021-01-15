@@ -31,10 +31,10 @@ namespace ConsoleApp.NUnit
 
             simpleTools.Instance.mgcFileDeleteIfExist(str_file_path);
 
-            var var_serialize = await simpleTools.Instance.mgcJsnAsncSerialize2File(mdlJson, str_file_path);
+            var var_serialize = await simpleTools.Instance.mgcJsnSerialize2FileAsnc(mdlJson, str_file_path);
             SimpleAssert(var_serialize.IsValid, var_serialize.Message);
 
-            var var_deserialize = await simpleTools.Instance.mgcJsnAsncDeserializeFromFile<models.MdlJsonTest>(str_file_path);
+            var var_deserialize = await simpleTools.Instance.mgcJsnDeserializeFromFileAsnc<models.MdlJsonTest>(str_file_path);
             SimpleAssert(var_deserialize.IsValid, var_deserialize.Message);
 
             SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");
@@ -60,7 +60,7 @@ namespace ConsoleApp.NUnit
             SimpleAssert(var_stream.IsValid, var_stream.Message);
 
 
-            var var_deserialize = await simpleTools.Instance.mgcJsncAsnDeserializeFromResource<models.MdlJsonTest>(assembly, str_name);
+            var var_deserialize = await simpleTools.Instance.mgcJsncDeserializeFromResourceAsnc<models.MdlJsonTest>(assembly, str_name);
             SimpleAssert(var_deserialize.IsValid, var_deserialize.Message);
 
             SimpleAssert(var_deserialize.Data.int_data == mdlJson.int_data, "Данные в сериализации и без не совпадают");            

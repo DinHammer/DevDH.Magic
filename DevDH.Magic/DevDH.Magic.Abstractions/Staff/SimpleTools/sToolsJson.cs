@@ -10,9 +10,9 @@ namespace DevDH.Magic.Abstractions.Staff
 {
     public partial class SimpleTools
     {
-        public Task<RequestResult<T>> mgcJsncAsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
-            => Task.Run(() => { return mgcJsnSncDeserializeFromResource<T>(assembly, str_name); });
-        public RequestResult<T> mgcJsnSncDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
+        public Task<RequestResult<T>> mgcJsncDeserializeFromResourceAsnc<T>(Assembly assembly, string str_name) where T : class
+            => Task.Run(() => { return mgcJsnDeserializeFromResource<T>(assembly, str_name); });
+        public RequestResult<T> mgcJsnDeserializeFromResource<T>(Assembly assembly, string str_name) where T : class
         {
             var var_stream = mgcRsrGetStreamByName(assembly, str_name);
             if (!var_stream.IsValid)
@@ -43,9 +43,9 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public Task<RequestResult<T>> mgcJsnAsncDeserializeFromFile<T>(string str_path) where T : class
-            => Task.Run(() => { return mgcJsnSncDeserializeFromFile<T>(str_path); });
-        public RequestResult<T> mgcJsnSncDeserializeFromFile<T>(string str_path) where T : class
+        public Task<RequestResult<T>> mgcJsnDeserializeFromFileAsnc<T>(string str_path) where T : class
+            => Task.Run(() => { return mgcJsnDeserializeFromFile<T>(str_path); });
+        public RequestResult<T> mgcJsnDeserializeFromFile<T>(string str_path) where T : class
         {
             var var_string = mgcFileReadAllText(str_path);
             if (!var_string.IsValid)
@@ -84,12 +84,12 @@ namespace DevDH.Magic.Abstractions.Staff
         //    }
         //}
 
-        public Task<RequestResult> mgcJsnAsncSerialize2File(
+        public Task<RequestResult> mgcJsnSerialize2FileAsnc(
             object item,
             string str_path,
             NullValueHandling nullValueHandling = NullValueHandling.Ignore)
-            => Task.Run(() => { return mgcJsnSncSerialize2File(item, str_path, nullValueHandling); });
-        public RequestResult mgcJsnSncSerialize2File(
+            => Task.Run(() => { return mgcJsnSerialize2File(item, str_path, nullValueHandling); });
+        public RequestResult mgcJsnSerialize2File(
             object item,
             string str_path,
             NullValueHandling nullValueHandling = NullValueHandling.Ignore)
@@ -114,9 +114,9 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public Task<RequestResult<string>> mgcJsnAsncGetStringByData(object item)
-            => Task.Run(() => { return mgcJsnSncGetStringByData(item); });
-        public RequestResult<string> mgcJsnSncGetStringByData(object item)
+        public Task<RequestResult<string>> mgcJsnGetStringByDataAsnc(object item)
+            => Task.Run(() => { return mgcJsnGetStringByData(item); });
+        public RequestResult<string> mgcJsnGetStringByData(object item)
         {
             try
             {
@@ -129,9 +129,9 @@ namespace DevDH.Magic.Abstractions.Staff
             }
         }
 
-        public Task<RequestResult<T>> mgcJsnAsncGetDataByString<T>(string jsonString) where T : class
-            => Task.Run(() => { return mgcJsnSncGetDataByString<T>(jsonString); });
-        public RequestResult<T> mgcJsnSncGetDataByString<T>(string jsonString) where T : class
+        public Task<RequestResult<T>> mgcJsnGetDataByStringAsnc<T>(string jsonString) where T : class
+            => Task.Run(() => { return mgcJsnGetDataByString<T>(jsonString); });
+        public RequestResult<T> mgcJsnGetDataByString<T>(string jsonString) where T : class
         {
             try
             {

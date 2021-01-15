@@ -9,27 +9,27 @@ namespace DevDH.Magic.Abstractions.Staff
     public partial class SimpleTools
     {
 
-        public string mgcConvertExceptionList2String(List<Exception> exceptions)
-        {
-            string result = string.Empty;
+        //public string mgcConvertExceptionList2String(List<Exception> exceptions)
+        //{
+        //    string result = string.Empty;
 
-            if (exceptions == null)
-            {
-                return result;
-            }
+        //    if (exceptions == null)
+        //    {
+        //        return result;
+        //    }
 
-            if (exceptions?.Count == 0)
-            {
-                return result;
-            }
+        //    if (exceptions?.Count == 0)
+        //    {
+        //        return result;
+        //    }
 
-            foreach (Exception exception in exceptions)
-            {
-                result = result + "\n" + exception.Message;
-            }
+        //    foreach (Exception exception in exceptions)
+        //    {
+        //        result = result + "\n" + exception.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public RequestResult<dalDataObjects.MgcInt> mgcConsvertString2Int(string str, int my_default_int = default_int)
         {
