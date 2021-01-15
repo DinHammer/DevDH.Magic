@@ -21,9 +21,9 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
 
         #region Add
-        public Task<RequestResult<T>> mgcAsncAdd<T>(T data) where T : class, dalDataObjects.IBaseObjectId
-        => Task.Run(() => { return mgcSncAdd<T>(data); });
-        public RequestResult<T> mgcSncAdd<T>(T data) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<T>> mgcAddAsnc<T>(T data) where T : class, dalDataObjects.IBaseObjectId
+        => Task.Run(() => { return mgcAdd<T>(data); });
+        public RequestResult<T> mgcAdd<T>(T data) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -38,14 +38,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(data, statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult<T>(data, statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult> mgcAsncAddRange<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncAddRange<T>(data); });
-        public RequestResult mgcSncAddRange<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcAddRangeAsnc<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcAddRange<T>(data); });
+        public RequestResult mgcAddRange<T>(List<T> data) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -59,15 +59,15 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
         #endregion
 
         #region Update
-        public Task<RequestResult> mgcAsncUpdate<T>(T data) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncUpdate<T>(data); });
-        public RequestResult mgcSncUpdate<T>(T data) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcUpdateAsnc<T>(T data) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcUpdate<T>(data); });
+        public RequestResult mgcUpdate<T>(T data) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -81,14 +81,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult> mgcAsncUpdateRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncUpdateRange<T>(items); });
-        public RequestResult mgcSncUpdateRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcUpdateRangeAsnc<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcUpdateRange<T>(items); });
+        public RequestResult mgcUpdateRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -102,15 +102,15 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
         #endregion
 
         #region Delete
-        public Task<RequestResult> mgcAsncDelete<T>(T item) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncDelete<T>(item); });
-        public RequestResult mgcSncDelete<T>(T item) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcDeleteAsnc<T>(T item) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcDelete<T>(item); });
+        public RequestResult mgcDelete<T>(T item) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -123,14 +123,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult> mgcAsncDeleteRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncDeleteRange<T>(items); });
-        public RequestResult mgcSncDeleteRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcDeleteRangeAsnc<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcDeleteRange<T>(items); });
+        public RequestResult mgcDeleteRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -143,71 +143,71 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult> mgcAsncDeleteById<T>(int id) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncDeleteById<T>(id); });
-        public RequestResult mgcSncDeleteById<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcDeleteByIdAsnc<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcDeleteById<T>(id); });
+        public RequestResult mgcDeleteById<T>(int id) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
-                var resultTmp = mgcSncGetById<T>(id);
+                var resultTmp = mgcGetById<T>(id);
                 if (!resultTmp.IsValid)
                 {
                     return new RequestResult(resultTmp.Status, resultTmp.Message);
                 }
 
-                return mgcSncDelete<T>(resultTmp.Data);
+                return mgcDelete<T>(resultTmp.Data);
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult> mgcAsncDeleteByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncDeleteByQuery<T>(predicate); });
-        public RequestResult mgcSncDeleteByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcDeleteByQueryAsnc<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcDeleteByQuery<T>(predicate); });
+        public RequestResult mgcDeleteByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
 
-                var resultTmp = mgcSncGetByQuery<T>(predicate);
+                var resultTmp = mgcGetByQuery<T>(predicate);
                 if (!resultTmp.IsValid)
                 {
                     return new RequestResult(resultTmp.Status, resultTmp.Message);
                 }
 
-                return mgcSncDeleteRange<T>(resultTmp.Data);
+                return mgcDeleteRange<T>(resultTmp.Data);
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult> mgcAsncDeleteAll<T>() where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncDeleteAll<T>(); });
-        public RequestResult mgcSncDeleteAll<T>() where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcDeleteAllAsnc<T>() where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcDeleteAll<T>(); });
+        public RequestResult mgcDeleteAll<T>() where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
-                var tmpAll = mgcSncGetAll<T>();
+                var tmpAll = mgcGetAll<T>();
                 if (!tmpAll.IsValid)
                 {
                     return new RequestResult(tmpAll.Status, tmpAll.Message);
                 }
 
-                return mgcSncDeleteRange<T>(tmpAll.Data);
+                return mgcDeleteRange<T>(tmpAll.Data);
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
             }
         }
 
@@ -215,9 +215,9 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
         #region Get
 
-        public Task<RequestResult<List<T>>> mgcAsncGetAll<T>() where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetAll<T>(); });
-        public RequestResult<List<T>> mgcSncGetAll<T>() where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<List<T>>> mgcGetAllAsnc<T>() where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetAll<T>(); });
+        public RequestResult<List<T>> mgcGetAll<T>() where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -229,14 +229,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<List<T>>(null, statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult<List<T>>(null, statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult<Tuple<int>>> mgcAsncGetCount<T>() where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetCount<T>(); });
-        public RequestResult<Tuple<int>> mgcSncGetCount<T>() where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<dalDataObjects.MgcInt>> mgcGetCountAsnc<T>() where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetCount<T>(); });
+        public RequestResult<dalDataObjects.MgcInt> mgcGetCount<T>() where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
@@ -244,19 +244,19 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                 {
                     int count = context.Set<T>().Count();
 
-                    return new RequestResult<Tuple<int>>(Tuple.Create(count), statusOk);
+                    return new RequestResult<dalDataObjects.MgcInt>(new dalDataObjects.MgcInt(count), statusOk);
                 }
             }
             catch (Exception ex)
             {
-                return new RequestResult<Tuple<int>>(null, statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult<dalDataObjects.MgcInt>(null, statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult<List<T>>> mgcAsncGetByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetByQuery<T>(predicate); });
-        public RequestResult<List<T>> mgcSncGetByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<List<T>>> mgcGetByQueryAsnc<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetByQuery<T>(predicate); });
+        public RequestResult<List<T>> mgcGetByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
         {
             List<T> result = new List<T>();
             try
@@ -271,14 +271,14 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<List<T>>(result, statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult<List<T>>(result, statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult<T>> mgcAsncGetFirstByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetFirstByQuery<T>(predicate); });
-        public RequestResult<T> mgcSncGetFirstByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<T>> mgcGetFirstByQueryAsnc<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetFirstByQuery<T>(predicate); });
+        public RequestResult<T> mgcGetFirstByQuery<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
         {
             T result = default;
             try
@@ -286,10 +286,10 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                 using (var context = GetMyContext())
                 {
 
-                    var resultTmp = mgcSncGetByQuery<T>(predicate);
+                    var resultTmp = mgcGetByQuery<T>(predicate);
                     if (!resultTmp.IsValid)
                     {
-                        return new RequestResult<T>(result, resultTmp.Status, resultTmp.Message, resultTmp.ExceptionList);
+                        return new RequestResult<T>(result, resultTmp.Status, resultTmp.Message, resultTmp.exception);
                     }
 
                     int count = resultTmp.Data.Count;
@@ -312,49 +312,49 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(result, statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult<T>(result, statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult<Tuple<bool, T>>> mgcAsncGetFirstByQueryCheckValid<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetFirstByQueryCheckValid<T>(predicate); });
-        public RequestResult<Tuple<bool, T>> mgcSncGetFirstByQueryCheckValid<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult<dalDataObjects.MgcBoolData<T>>> mgcGetFirstByQueryCheckValidAsnc<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetFirstByQueryCheckValid<T>(predicate); });
+        public RequestResult<dalDataObjects.MgcBoolData<T>> mgcGetFirstByQueryCheckValid<T>(Expression<Func<T, bool>> predicate) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
                 using (var context = GetMyContext())
                 {
-                    var resultTmp = mgcSncGetFirstByQuery<T>(predicate);
+                    var resultTmp = mgcGetFirstByQuery<T>(predicate);
 
                     switch (resultTmp.Status)
                     {
                         case RequestStatus.Ok:
-                            return new RequestResult<Tuple<bool, T>>(Tuple.Create(true, resultTmp.Data), statusOk);
+                            return new RequestResult<dalDataObjects.MgcBoolData<T>>(new dalDataObjects.MgcBoolData<T>(true, resultTmp.Data), statusOk);
                         case RequestStatus.NoContent:
-                            return new RequestResult<Tuple<bool, T>>(Tuple.Create(false, resultTmp.Data), statusOk);
+                            return new RequestResult<dalDataObjects.MgcBoolData<T>>(new dalDataObjects.MgcBoolData<T>(false, resultTmp.Data), statusOk);
                         default:
-                            return new RequestResult<Tuple<bool, T>>(null, resultTmp.Status, resultTmp.Message);
+                            return new RequestResult<dalDataObjects.MgcBoolData<T>>(null, resultTmp.Status, resultTmp.Message);
                     }
                 }
             }
             catch (Exception ex)
             {
-                return new RequestResult<Tuple<bool, T>>(Tuple.Create(false, default(T)), statusDatabaseError, ex.Message, new List<Exception> { ex });
+                return new RequestResult<dalDataObjects.MgcBoolData<T>>(new dalDataObjects.MgcBoolData<T>(false, default(T)), statusDatabaseError, ex.Message, ex);
             }
         }
 
 
-        public Task<RequestResult<T>> mgcAsncGetById<T>(int id) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetById<T>(id); });
-        public RequestResult<T> mgcSncGetById<T>(int id) where T : class, dalDataObjects.IBaseObjectId
-            => mgcSncGetFirstByQuery<T>(x => x.id == id);
+        public Task<RequestResult<T>> mgcGetByIdAsnc<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetById<T>(id); });
+        public RequestResult<T> mgcGetById<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+            => mgcGetFirstByQuery<T>(x => x.id == id);
 
 
-        public Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcSncGetByIdAndCheckValid<T>(id); });
-        public RequestResult<Tuple<bool, T>> mgcSncGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId
-            => mgcSncGetFirstByQueryCheckValid<T>(x => x.id == id);
+        public Task<RequestResult<dalDataObjects.MgcBoolData<T>>> mgcGetByIdAndCheckValidAsnc<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcGetByIdAndCheckValid<T>(id); });
+        public RequestResult<dalDataObjects.MgcBoolData<T>> mgcGetByIdAndCheckValid<T>(int id) where T : class, dalDataObjects.IBaseObjectId
+            => mgcGetFirstByQueryCheckValid<T>(x => x.id == id);
 
         #endregion
     }

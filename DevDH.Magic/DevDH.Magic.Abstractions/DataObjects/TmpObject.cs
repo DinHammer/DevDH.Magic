@@ -28,6 +28,18 @@ namespace DevDH.Magic.Abstractions.DataObjects
         public bool bool_value { get; set; }
     }
 
+    public class MgcBoolData<T> where T : class, IBaseObjectId
+    {
+        public MgcBoolData() { }
+        public MgcBoolData(bool bool_value, T data)
+        {
+            this.bool_value = bool_value;
+            this.data = data;
+        }
+        public bool bool_value { get; set; }
+        public T data { get; set; }
+    }
+
     public class MgcDateTimeOffset
     {
         public MgcDateTimeOffset() { }

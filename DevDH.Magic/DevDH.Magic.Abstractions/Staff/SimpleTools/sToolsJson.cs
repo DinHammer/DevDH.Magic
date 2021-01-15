@@ -35,7 +35,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(null, statusSomethingWrong, message: $"can not deserialize json resouce: {str_name} with error: {ex.Message}");
+                return new RequestResult<T>(null, statusSomethingWrong, message: $"can not deserialize json resouce: {str_name} with error: {ex.Message}", ex);
             }
             finally
             {
@@ -60,7 +60,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(null, statusSerializationError, message: $"can not deserialize json from file: {str_path} with error: {ex.Message}");
+                return new RequestResult<T>(null, statusSerializationError, message: $"can not deserialize json from file: {str_path} with error: {ex.Message}", ex);
             }
 
         }
@@ -110,7 +110,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult(statusSerializationError, message: $"can not serialize json to file: {str_path} with error: {ex.Message}" , exceptionList: new List<Exception> { ex });
+                return new RequestResult(statusSerializationError, message: $"can not serialize json to file: {str_path} with error: {ex.Message}" , ex );
             }
         }
 
@@ -125,7 +125,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<string>(string.Empty, statusSerializationError, message: $"can not serialize object to json with error: {ex.Message}" );
+                return new RequestResult<string>(string.Empty, statusSerializationError, message: $"can not serialize object to json with error: {ex.Message}", ex );
             }
         }
 
@@ -140,7 +140,7 @@ namespace DevDH.Magic.Abstractions.Staff
             }
             catch (Exception ex)
             {
-                return new RequestResult<T>(default(T), statusSerializationError, message:$"can not deserialize string to object with error: {ex.Message}" );
+                return new RequestResult<T>(default(T), statusSerializationError, message:$"can not deserialize string to object with error: {ex.Message}", ex );
             }
         }
     }

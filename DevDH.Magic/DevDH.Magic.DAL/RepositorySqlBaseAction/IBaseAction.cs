@@ -41,22 +41,22 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
         Task<RequestResult<List<T>>> mgcGetAllAsnc();
         RequestResult<List<T>> mgcGetAll();
 
-        Task<RequestResult<Tuple<int>>> mgcGetCountAsnc();
-        RequestResult<Tuple<int>> mgcSncGetCount();
+        Task<RequestResult<dalDataObjects.MgcInt>> mgcGetCountAsnc();
+        RequestResult<dalDataObjects.MgcInt> mgcGetCount();
 
-        Task<RequestResult<List<T>>> mgcAsncGetByQuery(Expression<Func<T, bool>> predicate);
-        RequestResult<List<T>> mgcSncGetByQuery(Expression<Func<T, bool>> predicate);
+        Task<RequestResult<List<T>>> mgcGetByQueryAsnc(Expression<Func<T, bool>> predicate);
+        RequestResult<List<T>> mgcGetByQuery(Expression<Func<T, bool>> predicate);
 
-        Task<RequestResult<T>> mgcAsncGetFirstByQuery(Expression<Func<T, bool>> predicate);
-        RequestResult<T> mgcSncGetFirstByQuery(Expression<Func<T, bool>> predicate);
+        Task<RequestResult<T>> mgcGetFirstByQueryAsnc(Expression<Func<T, bool>> predicate);
+        RequestResult<T> mgcGetFirstByQuery(Expression<Func<T, bool>> predicate);
 
-        Task<RequestResult<Tuple<bool, T>>> mgcAsncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate);
-        RequestResult<Tuple<bool, T>> mgcSncGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate);
+        Task<RequestResult<dalDataObjects.MgcBoolData<T>>> mgcGetFirstByQueryCheckValidAsnc(Expression<Func<T, bool>> predicate);
+        RequestResult<dalDataObjects.MgcBoolData<T>> mgcGetFirstByQueryCheckValid(Expression<Func<T, bool>> predicate);
 
-        Task<RequestResult<T>> mgcAsncGetById(int id);
-        RequestResult<T> mgcSncGetById(int id);
+        Task<RequestResult<T>> mgcGetByIdAsnc(int id);
+        RequestResult<T> mgcGetById(int id);
 
-        Task<RequestResult<Tuple<bool, T>>> mgcAsncGetByIdCheckValid(int id);
-        RequestResult<Tuple<bool, T>> mgcSncGetByIdCheckValid(int id);
+        Task<RequestResult<dalDataObjects.MgcBoolData<T>>> mgcGetByIdCheckValidAsnc(int id);
+        RequestResult<dalDataObjects.MgcBoolData<T>> mgcGetByIdCheckValid(int id);
     }
 }
