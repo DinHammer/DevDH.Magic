@@ -36,28 +36,28 @@ namespace ConsoleApp.NUnit
             dalDatabaseSql.Init();
 
 
-            var var_blog1 = await dalDatabaseSql.Blog.mgcAsncAdd(new dalDataObjects.Blog { Url = "www.ololo.com" });
+            var var_blog1 = await dalDatabaseSql.Blog.mgcAddAsnc(new dalDataObjects.Blog { Url = "www.ololo.com" });
             SimpleAssertRequest(var_blog1);
             blog1 = var_blog1.Data;
 
-            var var_blog2 = await dalDatabaseSql.Blog.mgcAsncAdd(new dalDataObjects.Blog { Url = "www.pishPish.com" });
+            var var_blog2 = await dalDatabaseSql.Blog.mgcAddAsnc(new dalDataObjects.Blog { Url = "www.pishPish.com" });
             SimpleAssertRequest(var_blog2);
             blog2 = var_blog2.Data;
 
-            var var_blog3 = await dalDatabaseSql.Blog.mgcAsncAdd(new dalDataObjects.Blog { Url = "www.ololoPishPish.com" });
+            var var_blog3 = await dalDatabaseSql.Blog.mgcAddAsnc(new dalDataObjects.Blog { Url = "www.ololoPishPish.com" });
             SimpleAssertRequest(var_blog3);
             blog3 = var_blog3.Data;
 
 
-            var var_post11 = await dalDatabaseSql.Post.mgcAsncAdd(new dalDataObjects.Post { Content = "post11", IdBlog = blog1.id });
+            var var_post11 = await dalDatabaseSql.Post.mgcAddAsnc(new dalDataObjects.Post { Content = "post11", IdBlog = blog1.id });
             SimpleAssertRequest(var_post11);
             post11 = var_post11.Data;
 
-            var var_post12 = await dalDatabaseSql.Post.mgcAsncAdd(new dalDataObjects.Post { Content = "post12", IdBlog = blog1.id });
+            var var_post12 = await dalDatabaseSql.Post.mgcAddAsnc(new dalDataObjects.Post { Content = "post12", IdBlog = blog1.id });
             SimpleAssertRequest(var_post12);
             post12 = var_post12.Data;
 
-            var var_post21 = await dalDatabaseSql.Post.mgcAsncAdd(new dalDataObjects.Post { Content = "post21", IdBlog = blog2.id });
+            var var_post21 = await dalDatabaseSql.Post.mgcAddAsnc(new dalDataObjects.Post { Content = "post21", IdBlog = blog2.id });
             SimpleAssertRequest(var_post21);
             post21 = var_post21.Data;
         }
@@ -65,29 +65,29 @@ namespace ConsoleApp.NUnit
         [Test]        
         public async Task TestGetAllBlog()
         {
-            var result = await dalDatabaseSql.Blog.mgcAsncGetAll();
+            var result = await dalDatabaseSql.Blog.mgcGetAllAsnc();
             SimpleAssertRequest(result);
         }
 
         [OneTimeTearDown]
         public async Task CleanUp()
         {
-            var var_blog1 = await dalDatabaseSql.Blog.mgcAsncDeleteById(blog1.id);
+            var var_blog1 = await dalDatabaseSql.Blog.mgcDeleteByIdAsnc(blog1.id);
             SimpleAssert(var_blog1.IsValid);
 
-            var var_blog2 = await dalDatabaseSql.Blog.mgcAsncDeleteById(blog2.id);
+            var var_blog2 = await dalDatabaseSql.Blog.mgcDeleteByIdAsnc(blog2.id);
             SimpleAssert(var_blog2.IsValid);
 
-            var var_blog3 = await dalDatabaseSql.Blog.mgcAsncDeleteById(blog3.id);
+            var var_blog3 = await dalDatabaseSql.Blog.mgcDeleteByIdAsnc(blog3.id);
             SimpleAssert(var_blog3.IsValid);
 
-            var var_post11 = await dalDatabaseSql.Post.mgcAsncDeleteById(post11.id);
+            var var_post11 = await dalDatabaseSql.Post.mgcDeleteByIdAsnc(post11.id);
             SimpleAssert(var_post11.IsValid);
 
-            var var_post12 = await dalDatabaseSql.Post.mgcAsncDeleteById(post12.id);
+            var var_post12 = await dalDatabaseSql.Post.mgcDeleteByIdAsnc(post12.id);
             SimpleAssert(var_post12.IsValid);
 
-            var var_post21 = await dalDatabaseSql.Post.mgcAsncDeleteById(post21.id);
+            var var_post21 = await dalDatabaseSql.Post.mgcDeleteByIdAsnc(post21.id);
             SimpleAssert(var_post21.IsValid);
         }
     }

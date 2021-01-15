@@ -11,37 +11,37 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
 {
     public interface IBaseAction<T> where T : class, dalDataObjects.IBaseObjectId
     {
-        Task<RequestResult<T>> mgcAsncAdd(T data);
-        RequestResult<T> mgcSncAdd(T data);
+        Task<RequestResult<T>> mgcAddAsnc(T data);
+        RequestResult<T> mgcAdd(T data);
 
-        Task<RequestResult> mgcAsncAddRange(List<T> data);
-        RequestResult mgcSncAddRange(List<T> data);
+        Task<RequestResult> mgcAddRangeAsnc(List<T> data);
+        RequestResult mgcAddRange(List<T> data);
 
-        Task<RequestResult> mgcAsncUpdate(T data);
-        RequestResult mgcSncUpdate(T data);
+        Task<RequestResult> mgcUpdateAsnc(T data);
+        RequestResult mgcUpdate(T data);
 
-        Task<RequestResult> mgcAsncUpdateRange(List<T> data);
-        RequestResult mgcSncUpdateRange(List<T> data);
+        Task<RequestResult> mgcUpdateRangeAsnc(List<T> data);
+        RequestResult mgcUpdateRange(List<T> data);
 
-        Task<RequestResult> mgcAsncDelete(T data);
-        RequestResult mgcSncDelete(T data);
+        Task<RequestResult> mgcDeleteAsnc(T data);
+        RequestResult mgcDelete(T data);
 
-        Task<RequestResult> mgcAsncDeleteRange(List<T> data);
-        RequestResult mgcSncDeleteRange(List<T> data);
+        Task<RequestResult> mgcDeleteRangeAsnc(List<T> data);
+        RequestResult mgcDeleteRange(List<T> data);
 
-        Task<RequestResult> mgcAsncDeleteById(int id);
-        RequestResult mgcSncDeleteById(int id);
+        Task<RequestResult> mgcDeleteByIdAsnc(int id);
+        RequestResult mgcDeleteById(int id);
 
-        Task<RequestResult> mgcAsncDeleteByQuery(Expression<Func<T, bool>> predicate);
-        RequestResult mgcSncDeleteByQuery(Expression<Func<T, bool>> predicate);
+        Task<RequestResult> mgcDeleteByQueryAsnc(Expression<Func<T, bool>> predicate);
+        RequestResult mgcDeleteByQuery(Expression<Func<T, bool>> predicate);
 
-        Task<RequestResult> mgcAsncDeleteAll();
-        RequestResult mgcSncDeleteAll();
+        Task<RequestResult> mgcDeleteAllAsnc();
+        RequestResult mgcDeleteAll();
 
-        Task<RequestResult<List<T>>> mgcAsncGetAll();
-        RequestResult<List<T>> mgcSncGetAll();
+        Task<RequestResult<List<T>>> mgcGetAllAsnc();
+        RequestResult<List<T>> mgcGetAll();
 
-        Task<RequestResult<Tuple<int>>> mgcAsncGetCount();
+        Task<RequestResult<Tuple<int>>> mgcGetCountAsnc();
         RequestResult<Tuple<int>> mgcSncGetCount();
 
         Task<RequestResult<List<T>>> mgcAsncGetByQuery(Expression<Func<T, bool>> predicate);

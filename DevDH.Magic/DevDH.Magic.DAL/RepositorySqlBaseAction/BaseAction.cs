@@ -16,37 +16,37 @@ namespace DevDH.Magic.DAL.RepositorySqlBaseAction
 
     public class BaseAction<T> : BaseAction, IBaseAction<T> where T : class, dalDataObjects.IBaseObjectId
     {
-        public Task<RequestResult<T>> mgcAsncAdd(T data) => dalRepositorySql.ActionSimple.mgcAsncAdd<T>(data);
-        public RequestResult<T> mgcSncAdd(T data) => dalRepositorySql.ActionSimple.mgcSncAdd<T>(data);
+        public Task<RequestResult<T>> mgcAddAsnc(T data) => dalRepositorySql.ActionSimple.mgcAsncAdd<T>(data);
+        public RequestResult<T> mgcAdd(T data) => dalRepositorySql.ActionSimple.mgcSncAdd<T>(data);
 
-        public Task<RequestResult> mgcAsncAddRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncAddRange<T>(data);
-        public RequestResult mgcSncAddRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncAddRange<T>(data);
+        public Task<RequestResult> mgcAddRangeAsnc(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncAddRange<T>(data);
+        public RequestResult mgcAddRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncAddRange<T>(data);
 
-        public Task<RequestResult> mgcAsncUpdate(T data) => dalRepositorySql.ActionSimple.mgcAsncUpdate<T>(data);
-        public RequestResult mgcSncUpdate(T data) => dalRepositorySql.ActionSimple.mgcSncUpdate<T>(data);
+        public Task<RequestResult> mgcUpdateAsnc(T data) => dalRepositorySql.ActionSimple.mgcAsncUpdate<T>(data);
+        public RequestResult mgcUpdate(T data) => dalRepositorySql.ActionSimple.mgcSncUpdate<T>(data);
 
-        public Task<RequestResult> mgcAsncUpdateRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncUpdateRange<T>(data);
-        public RequestResult mgcSncUpdateRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncUpdateRange<T>(data);
+        public Task<RequestResult> mgcUpdateRangeAsnc(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncUpdateRange<T>(data);
+        public RequestResult mgcUpdateRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncUpdateRange<T>(data);
 
-        public Task<RequestResult> mgcAsncDelete(T data) => dalRepositorySql.ActionSimple.mgcAsncDelete<T>(data);
-        public RequestResult mgcSncDelete(T data) => dalRepositorySql.ActionSimple.mgcSncDelete<T>(data);
+        public Task<RequestResult> mgcDeleteAsnc(T data) => dalRepositorySql.ActionSimple.mgcAsncDelete<T>(data);
+        public RequestResult mgcDelete(T data) => dalRepositorySql.ActionSimple.mgcSncDelete<T>(data);
 
-        public Task<RequestResult> mgcAsncDeleteRange(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncDeleteRange<T>(data);
-        public RequestResult mgcSncDeleteRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncDeleteRange<T>(data);
+        public Task<RequestResult> mgcDeleteRangeAsnc(List<T> data) => dalRepositorySql.ActionSimple.mgcAsncDeleteRange<T>(data);
+        public RequestResult mgcDeleteRange(List<T> data) => dalRepositorySql.ActionSimple.mgcSncDeleteRange<T>(data);
 
-        public Task<RequestResult> mgcAsncDeleteById(int id) => dalRepositorySql.ActionSimple.mgcAsncDeleteById<T>(id);
-        public RequestResult mgcSncDeleteById(int id) => dalRepositorySql.ActionSimple.mgcSncDeleteById<T>(id);
+        public Task<RequestResult> mgcDeleteByIdAsnc(int id) => dalRepositorySql.ActionSimple.mgcAsncDeleteById<T>(id);
+        public RequestResult mgcDeleteById(int id) => dalRepositorySql.ActionSimple.mgcSncDeleteById<T>(id);
 
-        public Task<RequestResult> mgcAsncDeleteByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncDeleteByQuery<T>(predicate);
-        public RequestResult mgcSncDeleteByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncDeleteByQuery<T>(predicate);
+        public Task<RequestResult> mgcDeleteByQueryAsnc(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncDeleteByQuery<T>(predicate);
+        public RequestResult mgcDeleteByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcSncDeleteByQuery<T>(predicate);
 
-        public Task<RequestResult> mgcAsncDeleteAll() => dalRepositorySql.ActionSimple.mgcAsncDeleteAll<T>();
-        public RequestResult mgcSncDeleteAll() => dalRepositorySql.ActionSimple.mgcSncDeleteAll<T>();
+        public Task<RequestResult> mgcDeleteAllAsnc() => dalRepositorySql.ActionSimple.mgcAsncDeleteAll<T>();
+        public RequestResult mgcDeleteAll() => dalRepositorySql.ActionSimple.mgcSncDeleteAll<T>();
 
-        public Task<RequestResult<List<T>>> mgcAsncGetAll() => dalRepositorySql.ActionSimple.mgcAsncGetAll<T>();
-        public RequestResult<List<T>> mgcSncGetAll() => dalRepositorySql.ActionSimple.mgcSncGetAll<T>();
+        public Task<RequestResult<List<T>>> mgcGetAllAsnc() => dalRepositorySql.ActionSimple.mgcAsncGetAll<T>();
+        public RequestResult<List<T>> mgcGetAll() => dalRepositorySql.ActionSimple.mgcSncGetAll<T>();
 
-        public Task<RequestResult<Tuple<int>>> mgcAsncGetCount() => dalRepositorySql.ActionSimple.mgcAsncGetCount<T>();
+        public Task<RequestResult<Tuple<int>>> mgcGetCountAsnc() => dalRepositorySql.ActionSimple.mgcAsncGetCount<T>();
         public RequestResult<Tuple<int>> mgcSncGetCount() => dalRepositorySql.ActionSimple.mgcSncGetCount<T>();
 
         public Task<RequestResult<List<T>>> mgcAsncGetByQuery(Expression<Func<T, bool>> predicate) => dalRepositorySql.ActionSimple.mgcAsncGetByQuery<T>(predicate);
