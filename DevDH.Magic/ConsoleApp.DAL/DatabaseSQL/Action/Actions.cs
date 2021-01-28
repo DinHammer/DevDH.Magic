@@ -20,6 +20,9 @@ namespace ConsoleApp.DAL.DatabaseSQL.Action
 
         public RequestResult InsetObjectRange(List<dalDataObjects.ObjectTest> items)
             => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsertRange<dalDataObjects.ObjectTest>(items, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");
+
+        public RequestResult InsetOrUpdateObjectRange(List<dalDataObjects.ObjectTest> items)
+            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsertOrUpdateRange<dalDataObjects.ObjectTest>(items, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");
     }
 
     public class ActionBlog : BaseAction<dalDataObjects.Blog>, IActionBlog

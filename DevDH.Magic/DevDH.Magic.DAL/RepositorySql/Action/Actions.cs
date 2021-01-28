@@ -372,6 +372,67 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             => Task.Run(() => { return GetDbContext(); });
         public DbContext GetDbContext() => GetMyContext();
 
+        #region InsertOrUpdate
+        public Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+            => mgcInsertOrUpdateRangeAsnc<T>(new List<T> { item }, str_table_name);
+        public RequestResult mgcInsertOrUpdate<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+            => mgcInsertOrUpdateRange<T>(new List<T> { item }, str_table_name);
+        #endregion
+
+        #region InsertOrUpdateRange
+        public Task<RequestResult> mgcInsertOrUpdateRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcInsertOrUpdateRange<T>(items, str_table_name); });
+        public RequestResult mgcInsertOrUpdateRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        {
+            try
+            {
+                using (var var_context = GetDbContext())
+                {
+                    int int_count = items.Count;
+                    for (int i = 0; i < int_count; i++)
+                    {
+                        var var_tmp = items[i];
+
+                        var var_data = var_context.Set<T>().Where(x => x.id == var_tmp.id).FirstOrDefault();
+                        if (var_data == null)
+                        {
+                            var_context.Set<T>().Add(var_tmp);
+                        }
+                        else
+                        {
+                            var_context.Entry<T>(var_tmp).State = EntityState.Deleted;
+                            var_context.Set<T>().Update(var_tmp);
+                            
+                        }
+                    }                    
+
+                    var_context.Database.OpenConnection();
+                    try
+                    {
+                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
+                        var_context.SaveChanges();
+                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
+                    }
+                    catch (Exception ex)
+                    {
+                        return new RequestResult(statusDatabaseError, ex.Message, ex);
+                    }
+                    finally
+                    {
+                        var_context.Database.CloseConnection();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
+            }
+
+            return new RequestResult(statusOk);
+        }
+        #endregion
+
+        #region Insert
         public Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
             => Task.Run(() => { return mgcInsert<T>(item, str_table_name); });
         public RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
@@ -405,7 +466,9 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
             return new RequestResult(statusOk);
         }
+        #endregion
 
+        #region InsertRange
         public Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
             => Task.Run(() => { return mgcInsertRange<T>(items, str_table_name); });
         public RequestResult mgcInsertRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
@@ -443,6 +506,8 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
             return new RequestResult(statusOk);
         }
+        #endregion
+
 
         //public Task<RequestResult<Tuple<bool, DataTable>>> GetDataTableByCmdAsync(string stringCmd, List<DbParameterCollection> dbParameterCollections = null)
         //    => Task.Run(() => { return GetDataTableByCmd(stringCmd, dbParameterCollections); });

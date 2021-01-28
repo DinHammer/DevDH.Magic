@@ -79,13 +79,29 @@ namespace ConsoleApp.NUnit
         {
             List<dalDataObjects.ObjectTest> list = new List<dalDataObjects.ObjectTest>();
             dalDataObjects.ObjectTest objectTest = null;
-            for (int i = 0; i < int_count; i++)
+            for (int i = 1; i < int_count; i++)
             {
                 objectTest = new dalDataObjects.ObjectTest { id = i, str_value = $"int_value_{i}" };
                 list.Add(objectTest);
             }
 
             var result = dalDatabaseSql.ObjectTest.InsetObjectRange(list);
+            SimpleAssertRequest(result);
+        }
+
+        [Test]
+        [TestCase(10)]
+        public void TestInsertOrUpdateDataRange(int int_count)
+        {
+            List<dalDataObjects.ObjectTest> list = new List<dalDataObjects.ObjectTest>();
+            dalDataObjects.ObjectTest objectTest = null;
+            for (int i = 1; i < int_count; i++)
+            {
+                objectTest = new dalDataObjects.ObjectTest { id = i, str_value = $"{i}_int_value_{i+1}" };
+                list.Add(objectTest);
+            }
+
+            var result = dalDatabaseSql.ObjectTest.InsetOrUpdateObjectRange(list);
             SimpleAssertRequest(result);
         }
 
