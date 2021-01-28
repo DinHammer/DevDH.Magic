@@ -162,8 +162,8 @@ namespace DevDH.Magic.DAL.RepositorySql
     public interface IActionSql
     {
 
-        Task<RequestResult<DbContext>> GetDbContextAsync();
-        RequestResult<DbContext> GetDbContext();        
+        Task<DbContext> GetDbContextAsync();
+        DbContext GetDbContext();        
     }
     #endregion
 }

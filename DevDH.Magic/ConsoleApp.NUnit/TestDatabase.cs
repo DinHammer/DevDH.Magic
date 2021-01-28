@@ -62,6 +62,18 @@ namespace ConsoleApp.NUnit
             post21 = var_post21.Data;
         }
 
+        [Test]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        public void TestInsertData(int int_id)
+        {
+            var result = dalDatabaseSql.Database.InsetTestObject(new dalDataObjects.ObjectTest { id = int_id, str_value = $"int_value_{int_id}" });
+            SimpleAssertRequest(result);
+        }
+
+
         [Test]        
         public async Task TestGetAllBlog()
         {

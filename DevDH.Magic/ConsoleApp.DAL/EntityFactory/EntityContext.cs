@@ -24,12 +24,16 @@ namespace ConsoleApp.DAL.EntityFactory
 {
     public class EntityContextSql : EntityContext
     {
+        public EntityContextSql()
+        {
+            Database.EnsureCreated();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string name_database = constString.name_database;
             string string_connection = $@"Data Source=(localdb)\MSSQLLocalDB;Database={name_database};Trusted_Connection=True;";
-            //optionsBuilder.UseSqlServer(string_connection);
-            optionsBuilder.UseSqlServer(string_connection, x => x.MigrationsAssembly("ConsoleApp.EntityFactory.Migrations.Sql"));
+            optionsBuilder.UseSqlServer(string_connection);
+            //optionsBuilder.UseSqlServer(string_connection, x => x.MigrationsAssembly("ConsoleApp.EntityFactory.Migrations.Sql"));
         }
     }
 
@@ -56,7 +60,7 @@ namespace ConsoleApp.DAL.EntityFactory
         public DbSet<dalDataObjects.Blog> Blogs { get; set; }
         public DbSet<dalDataObjects.BlogImage> BlogImages { get; set; }
         public DbSet<dalDataObjects.Post> Posts { get; set; }
-
+        public DbSet<dalDataObjects.ObjectTest> ObjectTests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

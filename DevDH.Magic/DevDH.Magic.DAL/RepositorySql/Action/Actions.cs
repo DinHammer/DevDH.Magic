@@ -368,13 +368,10 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
         }
 
-        public Task<RequestResult<DbContext>> GetDbContextAsync()
+        public Task<DbContext> GetDbContextAsync()
             => Task.Run(() => { return GetDbContext(); });
-        public RequestResult<DbContext> GetDbContext()
-        {
-            var context = GetMyContext();
-            return new RequestResult<DbContext>(context, statusOk);
-        }
+        public DbContext GetDbContext() => GetMyContext();
+        
         //public Task<RequestResult<Tuple<bool, DataTable>>> GetDataTableByCmdAsync(string stringCmd, List<DbParameterCollection> dbParameterCollections = null)
         //    => Task.Run(() => { return GetDataTableByCmd(stringCmd, dbParameterCollections); });
         //public RequestResult<Tuple<bool, DataTable>> GetDataTableByCmd(string stringCmd, List<DbParameterCollection> dbParameterCollections = null)
