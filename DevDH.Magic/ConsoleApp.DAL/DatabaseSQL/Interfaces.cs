@@ -17,8 +17,12 @@ namespace ConsoleApp.DAL.DatabaseSQL
     public interface IBaseAction<T> : DevDH.Magic.DAL.RepositorySqlBaseAction.IBaseAction<T> where T : class, dalDataObjects.IBaseObjectSql
     { }
     public interface IActionDatabase
+    {       
+    }
+
+    public interface IActionObjectTest : IBaseAction<dalDataObjects.ObjectTest>
     {
-        RequestResult InsetTestObject(dalDataObjects.ObjectTest objectTest);
+        RequestResult InsetObject(dalDataObjects.ObjectTest objectTest);
     }
 
     public interface IActionBlog : IBaseAction<dalDataObjects.Blog>

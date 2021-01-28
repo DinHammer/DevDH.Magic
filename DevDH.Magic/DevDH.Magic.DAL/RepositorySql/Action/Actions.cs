@@ -371,7 +371,41 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         public Task<DbContext> GetDbContextAsync()
             => Task.Run(() => { return GetDbContext(); });
         public DbContext GetDbContext() => GetMyContext();
-        
+
+        public Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcInsert<T>(item, str_table_name); });
+        public RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        {
+            try
+            {
+                using (var var_context = GetDbContext())
+                {
+                    var_context.Set<T>().Add(item);
+                    var_context.Database.OpenConnection();
+                    try
+                    {
+                        var_context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {str_table_name} ON");
+                        var_context.SaveChanges();
+                        var_context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {str_table_name} OFF");
+                    }
+                    catch (Exception ex)
+                    {
+                        return new RequestResult(statusDatabaseError, ex.Message, ex);
+                    }
+                    finally
+                    {
+                        var_context.Database.CloseConnection();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
+            }
+
+            return new RequestResult(statusOk);
+        }
+
         //public Task<RequestResult<Tuple<bool, DataTable>>> GetDataTableByCmdAsync(string stringCmd, List<DbParameterCollection> dbParameterCollections = null)
         //    => Task.Run(() => { return GetDataTableByCmd(stringCmd, dbParameterCollections); });
         //public RequestResult<Tuple<bool, DataTable>> GetDataTableByCmd(string stringCmd, List<DbParameterCollection> dbParameterCollections = null)

@@ -69,7 +69,7 @@ namespace ConsoleApp.NUnit
         [TestCase(5)]
         public void TestInsertData(int int_id)
         {
-            var result = dalDatabaseSql.Database.InsetTestObject(new dalDataObjects.ObjectTest { id = int_id, str_value = $"int_value_{int_id}" });
+            var result = dalDatabaseSql.ObjectTest.InsetObject(new dalDataObjects.ObjectTest { id = int_id, str_value = $"int_value_{int_id}" });
             SimpleAssertRequest(result);
         }
 

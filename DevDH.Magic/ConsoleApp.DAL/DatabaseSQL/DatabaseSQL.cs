@@ -12,11 +12,13 @@ namespace ConsoleApp.DAL.DatabaseSQL
             Blog = new Action.ActionBlog();
             BlogImage = new Action.ActionBlogImage();
             Post = new Action.ActionPost();
+            ObjectTest = new Action.ActionObjectTest();
         }
 
         public static IActionDatabase Database { get; private set; }
         public static IActionBlog Blog { get; private set; }
         public static IActionBlogImage BlogImage { get; private set; }
         public static IActionPost Post { get; private set; }
+        public static IActionObjectTest ObjectTest { get; private set; }
     }
 }

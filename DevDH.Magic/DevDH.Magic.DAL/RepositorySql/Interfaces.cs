@@ -161,9 +161,11 @@ namespace DevDH.Magic.DAL.RepositorySql
     #region IActionSql
     public interface IActionSql
     {
-
         Task<DbContext> GetDbContextAsync();
-        DbContext GetDbContext();        
+        DbContext GetDbContext();
+
+        Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
     }
     #endregion
 }

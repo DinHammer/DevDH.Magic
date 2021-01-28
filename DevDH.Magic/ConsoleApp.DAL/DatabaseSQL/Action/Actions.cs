@@ -10,38 +10,13 @@ namespace ConsoleApp.DAL.DatabaseSQL.Action
 {
     public class ActionDatabase : BaseAction, IActionDatabase
     {
-        public RequestResult InsetTestObject(dalDataObjects.ObjectTest objectTest)
-        {
-            using (var var_context = DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.GetDbContext())
-            {
-                var var_my_context = var_context as ConsoleApp.DAL.EntityFactory.EntityContextSql;
-                if (var_my_context == null)
-                {
-                    return new RequestResult(statusNotFound, message: "context not found");
-                }
-                var_context.Set<dalDataObjects.ObjectTest>().Add(objectTest);
+        
+    }
 
-                var_context.Database.OpenConnection();
-                try
-                {
-                    var_context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT dbo.{nameof(var_my_context.ObjectTests)} ON");
-                    var_context.SaveChanges();
-                    var_context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT dbo.{nameof(var_my_context.ObjectTests)} OFF");
-                    //transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    return new RequestResult(statusDatabaseError, ex.Message, ex);
-                }
-                finally
-                {
-                    var_context.Database.CloseConnection();
-
-                }
-
-                return new RequestResult(statusOk);
-            }
-        }
+    public class ActionObjectTest : BaseAction<dalDataObjects.ObjectTest>, IActionObjectTest
+    {
+        public RequestResult InsetObject(dalDataObjects.ObjectTest objectTest)
+            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsert<dalDataObjects.ObjectTest>(objectTest, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");        
     }
 
     public class ActionBlog : BaseAction<dalDataObjects.Blog>, IActionBlog
