@@ -164,6 +164,9 @@ namespace DevDH.Magic.DAL.RepositorySql
         Task<DbContext> GetDbContextAsync();
         DbContext GetDbContext();
 
+        Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcInsertRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+
         Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
         RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
     }

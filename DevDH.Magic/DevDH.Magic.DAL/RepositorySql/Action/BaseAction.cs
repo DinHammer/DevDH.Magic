@@ -28,5 +28,8 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             var myContext = contextFactory.GetDbContext();
             return myContext;
         }
+
+        protected string prtcGetIdentityInsertOn(string str_table_name) => $"SET IDENTITY_INSERT {str_table_name} ON";
+        protected string prtcGetIdentityInsertOff(string str_table_name) => $"SET IDENTITY_INSERT {str_table_name} OFF";
     }
 }

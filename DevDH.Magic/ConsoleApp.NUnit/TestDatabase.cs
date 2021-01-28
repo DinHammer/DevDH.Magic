@@ -73,6 +73,21 @@ namespace ConsoleApp.NUnit
             SimpleAssertRequest(result);
         }
 
+        [Test]
+        [TestCase(10)]        
+        public void TestInsertDataRange(int int_count)
+        {
+            List<dalDataObjects.ObjectTest> list = new List<dalDataObjects.ObjectTest>();
+            dalDataObjects.ObjectTest objectTest = null;
+            for (int i = 0; i < int_count; i++)
+            {
+                objectTest = new dalDataObjects.ObjectTest { id = i, str_value = $"int_value_{i}" };
+                list.Add(objectTest);
+            }
+
+            var result = dalDatabaseSql.ObjectTest.InsetObjectRange(list);
+            SimpleAssertRequest(result);
+        }
 
         [Test]        
         public async Task TestGetAllBlog()

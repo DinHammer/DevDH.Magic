@@ -384,9 +384,47 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                     var_context.Database.OpenConnection();
                     try
                     {
-                        var_context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {str_table_name} ON");
+                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
                         var_context.SaveChanges();
-                        var_context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {str_table_name} OFF");
+                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
+                    }
+                    catch (Exception ex)
+                    {
+                        return new RequestResult(statusDatabaseError, ex.Message, ex);
+                    }
+                    finally
+                    {
+                        var_context.Database.CloseConnection();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
+            }
+
+            return new RequestResult(statusOk);
+        }
+
+        public Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcInsertRange<T>(items, str_table_name); });
+        public RequestResult mgcInsertRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        {
+            try
+            {
+                using (var var_context = GetDbContext())
+                {
+                    foreach (var item in items)
+                    {
+                        var_context.Set<T>().Add(item);
+                    }
+                    
+                    var_context.Database.OpenConnection();
+                    try
+                    {
+                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
+                        var_context.SaveChanges();
+                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
                     }
                     catch (Exception ex)
                     {

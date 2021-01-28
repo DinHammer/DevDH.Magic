@@ -23,6 +23,7 @@ namespace ConsoleApp.DAL.DatabaseSQL
     public interface IActionObjectTest : IBaseAction<dalDataObjects.ObjectTest>
     {
         RequestResult InsetObject(dalDataObjects.ObjectTest objectTest);
+        RequestResult InsetObjectRange(List<dalDataObjects.ObjectTest> items);
     }
 
     public interface IActionBlog : IBaseAction<dalDataObjects.Blog>
