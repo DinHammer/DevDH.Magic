@@ -368,16 +368,16 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
 
         }
 
-        public Task<DbContext> GetDbContextAsync()
-            => Task.Run(() => { return GetDbContext(); });
-        public DbContext GetDbContext() => GetMyContext();
+        public Task<DbContext> mgcGetDbContextAsync()
+            => Task.Run(() => { return mgcGetDbContext(); });
+        public DbContext mgcGetDbContext() => GetMyContext();
 
         #region DeleteDatabase
-        public RequestResult DeleteDataAllInDatabase()
+        public RequestResult mgcDeleteDataAllInDatabase()
         {
             try
             {
-                using (var var_context = GetDbContext())
+                using (var var_context = mgcGetDbContext())
                 {
                     var_context.Database.EnsureDeleted();
                 }
@@ -405,7 +405,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         {
             try
             {
-                using (var var_context = GetDbContext())
+                using (var var_context = mgcGetDbContext())
                 {
                     int int_count = items.Count;
                     for (int i = 0; i < int_count; i++)
@@ -465,7 +465,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         {
             try
             {
-                using (var var_context = GetDbContext())
+                using (var var_context = mgcGetDbContext())
                 {
                     foreach (var item in items)
                     {
