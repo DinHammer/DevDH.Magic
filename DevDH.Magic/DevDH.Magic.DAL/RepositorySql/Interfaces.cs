@@ -164,6 +164,7 @@ namespace DevDH.Magic.DAL.RepositorySql
         Task<DbContext> GetDbContextAsync();
         DbContext GetDbContext();
 
+        RequestResult DeleteDataAllInDatabase();
         Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
         RequestResult mgcInsertOrUpdate<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
 

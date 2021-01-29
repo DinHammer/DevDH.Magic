@@ -10,6 +10,8 @@ namespace ConsoleApp.DAL.DatabaseSQL.Action
 {
     public class ActionDatabase : BaseAction, IActionDatabase
     {
+        public RequestResult DeleteDatabase()
+            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.DeleteDataAllInDatabase();
         
     }
 

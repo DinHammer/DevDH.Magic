@@ -372,6 +372,25 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             => Task.Run(() => { return GetDbContext(); });
         public DbContext GetDbContext() => GetMyContext();
 
+        #region DeleteDatabase
+        public RequestResult DeleteDataAllInDatabase()
+        {
+            try
+            {
+                using (var var_context = GetDbContext())
+                {
+                    var_context.Database.EnsureDeleted();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult(statusOk, ex.Message, ex);
+            }
+
+            return new RequestResult(statusOk);
+        }
+        #endregion
+
         #region InsertOrUpdate
         public Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
             => mgcInsertOrUpdateRangeAsnc<T>(new List<T> { item }, str_table_name);
@@ -436,36 +455,7 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         public Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
             => Task.Run(() => { return mgcInsert<T>(item, str_table_name); });
         public RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-        {
-            try
-            {
-                using (var var_context = GetDbContext())
-                {
-                    var_context.Set<T>().Add(item);
-                    var_context.Database.OpenConnection();
-                    try
-                    {
-                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
-                        var_context.SaveChanges();
-                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
-                    }
-                    catch (Exception ex)
-                    {
-                        return new RequestResult(statusDatabaseError, ex.Message, ex);
-                    }
-                    finally
-                    {
-                        var_context.Database.CloseConnection();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return new RequestResult(statusDatabaseError, ex.Message, ex);
-            }
-
-            return new RequestResult(statusOk);
-        }
+            => mgcInsertRange<T>(new List<T> { item }, str_table_name);        
         #endregion
 
         #region InsertRange

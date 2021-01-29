@@ -17,7 +17,8 @@ namespace ConsoleApp.DAL.DatabaseSQL
     public interface IBaseAction<T> : DevDH.Magic.DAL.RepositorySqlBaseAction.IBaseAction<T> where T : class, dalDataObjects.IBaseObjectSql
     { }
     public interface IActionDatabase
-    {       
+    {
+        RequestResult DeleteDatabase();
     }
 
     public interface IActionObjectTest : IBaseAction<dalDataObjects.ObjectTest>

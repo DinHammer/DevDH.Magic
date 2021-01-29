@@ -63,46 +63,31 @@ namespace ConsoleApp.NUnit
         }
 
         [Test]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
-        public void TestInsertData(int int_id)
+        public void TestDelete()
         {
-            var result = dalDatabaseSql.ObjectTest.InsetObject(new dalDataObjects.ObjectTest { id = int_id, str_value = $"int_value_{int_id}" });
+            var result = dalDatabaseSql.Database.DeleteDatabase();
             SimpleAssertRequest(result);
         }
 
-        [Test]
-        [TestCase(10)]        
-        public void TestInsertDataRange(int int_count)
-        {
-            List<dalDataObjects.ObjectTest> list = new List<dalDataObjects.ObjectTest>();
-            dalDataObjects.ObjectTest objectTest = null;
-            for (int i = 1; i < int_count; i++)
-            {
-                objectTest = new dalDataObjects.ObjectTest { id = i, str_value = $"int_value_{i}" };
-                list.Add(objectTest);
-            }
-
-            var result = dalDatabaseSql.ObjectTest.InsetObjectRange(list);
-            SimpleAssertRequest(result);
-        }
 
         [Test]
         [TestCase(10)]
+        [TestCase(20)]
         public void TestInsertOrUpdateDataRange(int int_count)
         {
+
             List<dalDataObjects.ObjectTest> list = new List<dalDataObjects.ObjectTest>();
-            dalDataObjects.ObjectTest objectTest = null;
+            dalDataObjects.ObjectTest objectTest = null;            
+
+            list = new List<dalDataObjects.ObjectTest>();            
             for (int i = 1; i < int_count; i++)
             {
                 objectTest = new dalDataObjects.ObjectTest { id = i, str_value = $"{i}_int_value_{i+1}" };
                 list.Add(objectTest);
             }
 
-            var result = dalDatabaseSql.ObjectTest.InsetOrUpdateObjectRange(list);
-            SimpleAssertRequest(result);
+            var result_insert = dalDatabaseSql.ObjectTest.InsetOrUpdateObjectRange(list);
+            SimpleAssertRequest(result_insert);
         }
 
         [Test]        
