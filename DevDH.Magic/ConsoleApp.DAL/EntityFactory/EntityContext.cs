@@ -62,6 +62,8 @@ namespace ConsoleApp.DAL.EntityFactory
         public DbSet<dalDataObjects.Post> Posts { get; set; }
         public DbSet<dalDataObjects.ObjectTest> ObjectTests { get; set; }
 
+        public DbSet<dalDataObjects.ObjectTestLink> ObjectTestLinks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<dalDataObjects.Post>()
@@ -73,6 +75,11 @@ namespace ConsoleApp.DAL.EntityFactory
                 .HasOne(x => x.BlogImage)
                 .WithOne(y => y.Blog)
                 .HasForeignKey<dalDataObjects.BlogImage>(x => x.IdBlog);
+
+            modelBuilder.Entity<dalDataObjects.ObjectTest>()
+                .HasOne(x => x.ObjectTestLink)
+                .WithMany(y => y.ObjectTests)
+                .HasForeignKey(x => x.ObjectTestLinkId);
         }
     }
 }

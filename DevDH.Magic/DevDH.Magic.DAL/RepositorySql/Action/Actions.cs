@@ -455,7 +455,22 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         public Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
             => Task.Run(() => { return mgcInsert<T>(item, str_table_name); });
         public RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            => mgcInsertRange<T>(new List<T> { item }, str_table_name);        
+            //=> mgcInsertRange<T>(new List<T> { item }, str_table_name);        
+        {
+            try
+            {
+                using (var var_context = mgcGetDbContext())
+                {
+                    var_context.Entry(item).State = EntityState.Detached;
+                    var_context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResult(statusDatabaseError, ex.Message, ex);
+            }
+            return new RequestResult(statusOk);
+        }
         #endregion
 
         #region InsertRange

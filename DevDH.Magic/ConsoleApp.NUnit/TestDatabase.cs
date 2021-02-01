@@ -8,6 +8,7 @@ using dalRepositorySql = DevDH.Magic.DAL.RepositorySql.RepositorySql;
 using entityFactory = ConsoleApp.DAL.EntityFactory;
 using dalDataObjects = ConsoleApp.Abstractions.DataObjects;
 using constEnums = ConsoleApp.Abstractions.Constants.ConstantEnums;
+using System.Linq;
 
 namespace ConsoleApp.NUnit
 {
@@ -86,7 +87,8 @@ namespace ConsoleApp.NUnit
                 list.Add(objectTest);
             }
 
-            var result_insert = dalDatabaseSql.ObjectTest.InsetOrUpdateObjectRange(list);
+            //var result_insert = dalDatabaseSql.ObjectTest.InsetOrUpdateObjectRange(list);
+            var result_insert = dalDatabaseSql.ObjectTest.InsetObject(list.First());
             SimpleAssertRequest(result_insert);
         }
 
