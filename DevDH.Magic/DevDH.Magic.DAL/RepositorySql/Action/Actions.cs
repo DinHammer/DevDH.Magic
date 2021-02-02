@@ -460,8 +460,8 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
             try
             {
                 using (var var_context = mgcGetDbContext())
-                {
-                    var_context.Entry(item).State = EntityState.Detached;
+                {                    
+                    var_context.Entry(item).State = EntityState.Added;
                     var_context.SaveChanges();
                 }
             }
