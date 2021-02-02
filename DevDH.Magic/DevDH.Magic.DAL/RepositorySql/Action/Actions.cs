@@ -392,107 +392,100 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
         #endregion
 
         #region InsertOrUpdate
-        public Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            => mgcInsertOrUpdateRangeAsnc<T>(new List<T> { item }, str_table_name);
-        public RequestResult mgcInsertOrUpdate<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            => mgcInsertOrUpdateRange<T>(new List<T> { item }, str_table_name);
+        //public Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        //    => mgcInsertOrUpdateRangeAsnc<T>(new List<T> { item }, str_table_name);
+        //public RequestResult mgcInsertOrUpdate<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        //    => mgcInsertOrUpdateRange<T>(new List<T> { item }, str_table_name);
         #endregion
 
         #region InsertOrUpdateRange
-        public Task<RequestResult> mgcInsertOrUpdateRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcInsertOrUpdateRange<T>(items, str_table_name); });
-        public RequestResult mgcInsertOrUpdateRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-        {
-            try
-            {
-                using (var var_context = mgcGetDbContext())
-                {
-                    int int_count = items.Count;
-                    for (int i = 0; i < int_count; i++)
-                    {
-                        var var_tmp = items[i];
+        //public Task<RequestResult> mgcInsertOrUpdateRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        //    => Task.Run(() => { return mgcInsertOrUpdateRange<T>(items, str_table_name); });
+        //public RequestResult mgcInsertOrUpdateRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        //{
+        //    try
+        //    {
+        //        using (var var_context = mgcGetDbContext())
+        //        {
+        //            int int_count = items.Count;
+        //            for (int i = 0; i < int_count; i++)
+        //            {
+        //                var var_tmp = items[i];
 
-                        var var_data = var_context.Set<T>().Where(x => x.id == var_tmp.id).FirstOrDefault();
-                        if (var_data == null)
-                        {
-                            var_context.Set<T>().Add(var_tmp);
-                        }
-                        else
-                        {
-                            var_context.Entry<T>(var_tmp).State = EntityState.Deleted;
-                            var_context.Set<T>().Update(var_tmp);
+        //                var var_data = var_context.Set<T>().Where(x => x.id == var_tmp.id).FirstOrDefault();
+        //                if (var_data == null)
+        //                {
+        //                    var_context.Set<T>().Add(var_tmp);
+        //                }
+        //                else
+        //                {
+        //                    var_context.Entry<T>(var_tmp).State = EntityState.Deleted;
+        //                    var_context.Set<T>().Update(var_tmp);
                             
-                        }
-                    }                    
+        //                }
+        //            }                    
 
-                    var_context.Database.OpenConnection();
-                    try
-                    {
-                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
-                        var_context.SaveChanges();
-                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
-                    }
-                    catch (Exception ex)
-                    {
-                        return new RequestResult(statusDatabaseError, ex.Message, ex);
-                    }
-                    finally
-                    {
-                        var_context.Database.CloseConnection();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return new RequestResult(statusDatabaseError, ex.Message, ex);
-            }
+        //            var_context.Database.OpenConnection();
+        //            try
+        //            {
+        //                var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
+        //                var_context.SaveChanges();
+        //                var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                return new RequestResult(statusDatabaseError, ex.Message, ex);
+        //            }
+        //            finally
+        //            {
+        //                var_context.Database.CloseConnection();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new RequestResult(statusDatabaseError, ex.Message, ex);
+        //    }
 
-            return new RequestResult(statusOk);
-        }
+        //    return new RequestResult(statusOk);
+        //}
         #endregion
 
         #region Insert
-        public Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcInsert<T>(item, str_table_name); });
-        public RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            //=> mgcInsertRange<T>(new List<T> { item }, str_table_name);        
-        {
-            try
-            {
-                using (var var_context = mgcGetDbContext())
-                {                    
-                    var_context.Entry(item).State = EntityState.Added;
-                    var_context.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                return new RequestResult(statusDatabaseError, ex.Message, ex);
-            }
-            return new RequestResult(statusOk);
-        }
+        public Task<RequestResult> mgcInsertAsnc<T>(T item) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcInsert<T>(item); });
+        public RequestResult mgcInsert<T>(T item) where T : class, dalDataObjects.IBaseObjectId
+            => mgcInsertRange<T>(new List<T> { item });        
+        
         #endregion
 
         #region InsertRange
-        public Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
-            => Task.Run(() => { return mgcInsertRange<T>(items, str_table_name); });
-        public RequestResult mgcInsertRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId
+        public Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
+            => Task.Run(() => { return mgcInsertRange<T>(items); });
+        public RequestResult mgcInsertRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId
         {
             try
             {
                 using (var var_context = mgcGetDbContext())
                 {
-                    foreach (var item in items)
-                    {
-                        var_context.Set<T>().Add(item);
-                    }
                     
-                    var_context.Database.OpenConnection();
+                    
+                    //var_context.Database.OpenConnection();
                     try
                     {
-                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
+                        var_context.ChangeTracker.AutoDetectChangesEnabled = false;
+                        foreach (var item in items)
+                        {
+                            //var_context.Set<T>().Add(item);
+                            var_context.Entry(item).State = EntityState.Added;
+                        }
+
                         var_context.SaveChanges();
-                        var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
+                        var_context.ChangeTracker.AutoDetectChangesEnabled = true;
+
+                        //var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOn(str_table_name));
+                        //var_context.SaveChanges();
+                        //var_context.Database.ExecuteSqlRaw(prtcGetIdentityInsertOff(str_table_name));
                     }
                     catch (Exception ex)
                     {
@@ -500,7 +493,8 @@ namespace DevDH.Magic.DAL.RepositorySql.Action
                     }
                     finally
                     {
-                        var_context.Database.CloseConnection();
+                        //var_context.Database.CloseConnection();
+                        var_context.ChangeTracker.AutoDetectChangesEnabled = true;
                     }
                 }
             }

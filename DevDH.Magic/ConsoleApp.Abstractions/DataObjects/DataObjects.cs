@@ -18,8 +18,8 @@ namespace ConsoleApp.Abstractions.DataObjects
     {
         public string str_value { get; set; }
         
-        public virtual ObjectTestLink ObjectTestLink { get; set; }
-        public int ObjectTestLinkId { get; set; }
+        //public virtual ObjectTestLink ObjectTestLink { get; set; }
+        //public int ObjectTestLinkId { get; set; }
     }
 
     public class Blog : BaseObjectSql

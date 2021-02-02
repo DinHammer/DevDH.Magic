@@ -18,13 +18,13 @@ namespace ConsoleApp.DAL.DatabaseSQL.Action
     public class ActionObjectTest : BaseAction<dalDataObjects.ObjectTest>, IActionObjectTest
     {
         public RequestResult InsetObject(dalDataObjects.ObjectTest objectTest)
-            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsert<dalDataObjects.ObjectTest>(objectTest, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");
+            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsert<dalDataObjects.ObjectTest>(objectTest);
 
         public RequestResult InsetObjectRange(List<dalDataObjects.ObjectTest> items)
-            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsertRange<dalDataObjects.ObjectTest>(items, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");
+            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsertRange<dalDataObjects.ObjectTest>(items);
 
-        public RequestResult InsetOrUpdateObjectRange(List<dalDataObjects.ObjectTest> items)
-            => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsertOrUpdateRange<dalDataObjects.ObjectTest>(items, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");
+        //public RequestResult InsetOrUpdateObjectRange(List<dalDataObjects.ObjectTest> items)
+        //    => DevDH.Magic.DAL.RepositorySql.RepositorySql.ActionSql.mgcInsertOrUpdateRange<dalDataObjects.ObjectTest>(items, $"dbo.{nameof(ConsoleApp.DAL.EntityFactory.EntityContextSql.ObjectTests)}");
     }
 
     public class ActionBlog : BaseAction<dalDataObjects.Blog>, IActionBlog
