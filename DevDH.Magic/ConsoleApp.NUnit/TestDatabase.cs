@@ -72,19 +72,25 @@ namespace ConsoleApp.NUnit
 
 
         [Test]        
-        [TestCase(10)]
-        [TestCase(20)]
-        [TestCase(1000000)]
-        public void TestInsertLinkDataData(int int_count)
+        [TestCase(10, false)]
+        [TestCase(20, true)]
+        [TestCase(1000000,true)]
+        public void TestInsert(int int_count, bool isUpLetters)
         {
 
             List<dalDataObjects.ObjectTest> list = new List<dalDataObjects.ObjectTest>();
             dalDataObjects.ObjectTest objectTest = null;            
 
-            list = new List<dalDataObjects.ObjectTest>();            
+            list = new List<dalDataObjects.ObjectTest>();
+            string str_text = string.Empty;
             for (int i = 1; i < int_count; i++)
             {
-                objectTest = new dalDataObjects.ObjectTest { id = i, str_value = $"{i}_int_value_{i+1}" };
+                str_text = $"{i}_int_value_{i + 1}";
+                if (isUpLetters)
+                {
+                    str_text = str_text.ToUpper();
+                }
+                objectTest = new dalDataObjects.ObjectTest { id = i, str_value = str_text };
                 list.Add(objectTest);
             }
 
