@@ -94,7 +94,7 @@ namespace ConsoleApp.NUnit
                 list.Add(objectTest);
             }
 
-            var result_insert = dalDatabaseSql.ObjectTest.InsetObjectRange(list);
+            var result_insert = dalDatabaseSql.ObjectTest.InsetOrUpdateObjectRange(list);
             //var result_insert = dalDatabaseSql.ObjectTest.InsetObject(list.First());
             SimpleAssertRequest(result_insert);
         }

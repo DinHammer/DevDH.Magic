@@ -182,8 +182,8 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="item">имя данного</param>
         /// <param name="str_table_name">имя таблицы в которую необходимо вставить данные (для MsSql стоит добавлять dbo. префикс перед именем)</param>
         /// <returns></returns>
-        //Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
-        //RequestResult mgcInsertOrUpdate<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        Task<RequestResult> mgcInsertOrUpdateAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcInsertOrUpdate<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Вставить набор данных по id или обновить если id уже занят
@@ -192,8 +192,8 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <param name="items">имя данных</param>
         /// <param name="str_table_name">имя таблицы в которую необходимо вставить данные (для MsSql стоит добавлять dbo. префикс перед именем)</param>
         /// <returns></returns>
-        //Task<RequestResult> mgcInsertOrUpdateRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
-        //RequestResult mgcInsertOrUpdateRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        Task<RequestResult> mgcInsertOrUpdateRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcInsertOrUpdateRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Вставить набор данных по id
@@ -201,8 +201,8 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <typeparam name="T">тип данных</typeparam>
         /// <param name="items">имя данных</param>        
         /// <returns></returns>
-        Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcInsertRange<T>(List<T> items) where T : class, dalDataObjects.IBaseObjectId;
+        Task<RequestResult> mgcInsertRangeAsnc<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcInsertRange<T>(List<T> items, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
 
         /// <summary>
         /// Вставить одно данное по id
@@ -210,8 +210,8 @@ namespace DevDH.Magic.DAL.RepositorySql
         /// <typeparam name="T">тип данного</typeparam>
         /// <param name="item">имя данного</param>        
         /// <returns></returns>
-        Task<RequestResult> mgcInsertAsnc<T>(T item) where T : class, dalDataObjects.IBaseObjectId;
-        RequestResult mgcInsert<T>(T item) where T : class, dalDataObjects.IBaseObjectId;
+        Task<RequestResult> mgcInsertAsnc<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
+        RequestResult mgcInsert<T>(T item, string str_table_name) where T : class, dalDataObjects.IBaseObjectId;
     }
     #endregion
 }

@@ -25,7 +25,7 @@ namespace ConsoleApp.DAL.DatabaseSQL
     {
         RequestResult InsetObject(dalDataObjects.ObjectTest objectTest);
         RequestResult InsetObjectRange(List<dalDataObjects.ObjectTest> items);
-        //RequestResult InsetOrUpdateObjectRange(List<dalDataObjects.ObjectTest> items);
+        RequestResult InsetOrUpdateObjectRange(List<dalDataObjects.ObjectTest> items);
     }
 
     public interface IActionBlog : IBaseAction<dalDataObjects.Blog>
